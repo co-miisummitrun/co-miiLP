@@ -10,64 +10,105 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <style>
-        body { font-family: 'Noto Sans JP', sans-serif; color: #333; margin: 0; padding: 0; background-color: #f6f8e8; }
+        /* モダンなフォームデザイン */
+        body { 
+            font-family: 'Noto Sans JP', sans-serif; color: #333; margin: 0; padding: 0; 
+            background-color: #f4f8fc; /* LPの背景に合わせた洗練された色 */
+            letter-spacing: 0.03em;
+        }
         * { box-sizing: border-box; }
 
-        header { background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 20px; text-align: center; }
-        .logo { font-size: 22px; font-weight: 900; color: #0056b3; text-decoration: none; }
+        header { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px; text-align: center; }
+        .logo { font-size: 24px; font-weight: 900; color: #006aa6; text-decoration: none; letter-spacing: 0.05em; }
 
-        .form-section { padding: 50px 20px 80px; }
-        .form-container { max-width: 800px; margin: 0 auto; }
-        .form-title { font-size: 18px; font-weight: 900; margin-bottom: 35px; color: #000; }
+        .form-section { padding: 60px 20px 80px; }
         
-        .form-group { display: flex; margin-bottom: 15px; align-items: center; }
-        .form-group > label { width: 250px; font-size: 14px; color: #000; flex-shrink: 0; }
-        .form-group .req { color: #e00; margin-left: 2px; }
+        /* フォームを美しいカードとして見せる */
+        .form-container { 
+            max-width: 800px; margin: 0 auto; background: #fff; padding: 60px 50px; 
+            border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.06); 
+            border-top: 6px solid #006aa6;
+        }
+        
+        .form-title { font-size: 24px; font-weight: 900; margin-top: 0; margin-bottom: 40px; color: #333; text-align: center; }
+        
+        .form-group { display: flex; margin-bottom: 25px; align-items: center; }
+        .form-group > label { width: 250px; font-size: 15px; font-weight: bold; color: #444; flex-shrink: 0; }
+        .form-group .req { color: #e74c3c; margin-left: 5px; font-size: 13px; vertical-align: top;}
         
         .form-input-box { flex: 1; display: flex; align-items: center; }
+        
+        /* 入力エリアのモダン化 */
         .form-input-box input[type="text"],
         .form-input-box input[type="email"],
         .form-input-box input[type="tel"],
         .form-input-box select,
         .form-input-box textarea {
-            width: 100%; max-width: 400px; padding: 6px 10px; border: 1px solid #ccc;
-            border-radius: 2px; font-size: 14px; background-color: #fff;
+            width: 100%; max-width: 450px; padding: 12px 15px; border: 1px solid #dcdcdc;
+            border-radius: 8px; font-size: 15px; background-color: #fafafa; transition: 0.3s;
+            font-family: inherit; color: #333;
         }
-        .form-input-box textarea { height: 80px; resize: vertical; }
+        
+        /* フォーカス時（入力中）に青く光るエフェクト */
+        .form-input-box input:focus, .form-input-box select:focus, .form-input-box textarea:focus {
+            background-color: #fff; border-color: #006aa6; outline: none; box-shadow: 0 0 0 4px rgba(0,106,166,0.15);
+        }
+        
+        .form-input-box textarea { height: 120px; resize: vertical; }
         
         .form-group.align-top { align-items: flex-start; }
-        .form-group.align-top > label { margin-top: 6px; }
+        .form-group.align-top > label { margin-top: 12px; }
 
-        .privacy-check { display: flex; align-items: center; font-size: 14px; margin-bottom: 25px; margin-top: 10px; }
-        .privacy-check input { margin-right: 5px; cursor: pointer; width: 15px; height: 15px; }
-        .privacy-check a { color: blue; text-decoration: underline; }
+        .privacy-check { display: flex; align-items: center; font-size: 15px; margin-bottom: 30px; margin-top: 15px; font-weight: bold;}
+        .privacy-check input { margin-right: 8px; cursor: pointer; width: 18px; height: 18px; accent-color: #006aa6; }
+        .privacy-check a { color: #006aa6; text-decoration: underline; }
 
-        .form-buttons { display: flex; gap: 10px; }
-        .btn-submit { background-color: #0088ff; color: #fff; border: none; padding: 8px 20px; font-size: 14px; font-weight: bold; border-radius: 3px; cursor: pointer; transition: 0.2s; }
-        .btn-submit:hover { background-color: #0066cc; }
-        .btn-submit:disabled { background-color: #999; cursor: not-allowed; }
-        .btn-reset { background-color: #f1f1f1; color: #333; border: 1px solid #ccc; padding: 8px 16px; font-size: 14px; border-radius: 3px; cursor: pointer; transition: 0.2s; }
-        .btn-reset:hover { background-color: #e2e2e2; }
+        .form-buttons { display: flex; gap: 15px; margin-top: 10px; }
+        .btn-submit { 
+            background: linear-gradient(135deg, #007bc7 0%, #0056b3 100%); color: #fff; border: none; 
+            padding: 15px 40px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; 
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(0,106,166,0.3);
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,106,166,0.4); }
+        .btn-submit:disabled { background: #bbb; box-shadow: none; cursor: not-allowed; transform: none; }
+        
+        .btn-reset { 
+            background-color: #fff; color: #666; border: 1px solid #ccc; padding: 15px 30px; 
+            font-size: 15px; font-weight: bold; border-radius: 50px; cursor: pointer; transition: 0.3s; 
+        }
+        .btn-reset:hover { background-color: #f1f1f1; border-color: #aaa; }
 
         /* 送信完了ポップアップ（モーダル）のデザイン */
         .popup-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center;
+            background-color: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
         }
         .popup-content {
-            background-color: #fff; padding: 40px; border-radius: 12px; text-align: center;
-            max-width: 420px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background-color: #fff; padding: 50px 40px; border-radius: 20px; text-align: center;
+            max-width: 450px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            animation: popIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
         }
-        .popup-content h3 { font-size: 22px; color: #333; margin-top: 0; margin-bottom: 15px; }
-        .popup-content p { font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 25px; }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        
+        .popup-content h3 { font-size: 26px; color: #333; margin-top: 0; margin-bottom: 20px; }
+        .popup-content p { font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 30px; }
+        .popup-btn { 
+            padding: 15px 30px; background-color: #006aa6; color: white; border: none; border-radius: 30px; 
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,106,166,0.3);
+        }
+        .popup-btn:hover { background-color: #0056b3; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,106,166,0.4);}
 
         @media (max-width: 768px) {
-            .form-group { flex-direction: column; align-items: flex-start; }
-            .form-group > label { width: 100%; margin-bottom: 5px; }
+            .form-container { padding: 40px 20px; border-radius: 16px; }
+            .form-group { flex-direction: column; align-items: flex-start; margin-bottom: 20px;}
+            .form-group > label { width: 100%; margin-bottom: 8px; }
             .form-input-box { width: 100%; }
             .form-input-box input[type="text"], .form-input-box input[type="email"],
             .form-input-box input[type="tel"], .form-input-box select, .form-input-box textarea { max-width: 100%; }
             .desktop-only { display: none; }
+            .form-buttons { flex-direction: column; width: 100%; }
+            .btn-submit, .btn-reset { width: 100%; }
         }
     </style>
 </head>
@@ -79,30 +120,30 @@
 
     <section class="form-section">
         <div class="form-container">
-            <h2 class="form-title">AIセラピスト co-mii お問い合わせフォーム</h2>
+            <h2 class="form-title">お問い合わせ・資料請求フォーム</h2>
             
             <form id="contactForm" action="https://ssgform.com/s/THAz3NmzXbPU" method="POST" target="hidden_iframe">
                 
                 <div class="form-group">
                     <label>会社<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="text" name="会社" required></div>
+                    <div class="form-input-box"><input type="text" name="会社" required placeholder="例：株式会社サミットラン"></div>
                 </div>
                 
                 <div class="form-group">
                     <label>お名前<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="text" name="お名前" required></div>
+                    <div class="form-input-box"><input type="text" name="お名前" required placeholder="例：山田 太郎"></div>
                 </div>
                 
                 <div class="form-group">
                     <label>電話番号<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="tel" name="電話番号" required></div>
+                    <div class="form-input-box"><input type="tel" name="電話番号" required placeholder="例：03-1234-5678"></div>
                 </div>
                 
                 <div class="form-group">
                     <label>メール<span class="req">*</span></label>
-                    <div class="form-input-box" style="gap: 8px;">
-                        <input type="email" name="email" required style="flex: 1; max-width: 370px;">
-                        <i class="fa-regular fa-circle-question" style="color: #bbb; font-size: 18px;" title="半角英数字で入力してください"></i>
+                    <div class="form-input-box" style="gap: 10px;">
+                        <input type="email" name="email" required style="flex: 1; max-width: 410px;" placeholder="例：info@example.com">
+                        <i class="fa-regular fa-circle-question" style="color: #ccc; font-size: 20px;" title="半角英数字で入力してください"></i>
                     </div>
                 </div>
                 
@@ -120,7 +161,7 @@
                 
                 <div class="form-group">
                     <label>ご住所<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="text" name="ご住所" required></div>
+                    <div class="form-input-box"><input type="text" name="ご住所" required placeholder="都道府県・市区町村・番地"></div>
                 </div>
                 
                 <div class="form-group">
@@ -155,7 +196,7 @@
                 
                 <div class="form-group align-top">
                     <label>備考欄</label>
-                    <div class="form-input-box"><textarea name="備考欄"></textarea></div>
+                    <div class="form-input-box"><textarea name="備考欄" placeholder="ご質問やご要望があればご記入ください"></textarea></div>
                 </div>
 
                 <div class="form-group align-top">
@@ -167,10 +208,10 @@
                             <label for="privacy-check"><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する。</label>
                         </div>
 
-                        <div class="g-recaptcha" data-sitekey="6Lf1YmosAAAAAJb0XXNx1WjR3T3bIdkzvTH3X0p9" style="margin-bottom: 20px;"></div>
+                        <div class="g-recaptcha" data-sitekey="6LdRa2osAAAAAN50ze-QGkbzHiF3j-3pAzcmuW9d" style="margin-bottom: 25px;"></div>
 
                         <div class="form-buttons">
-                            <button type="submit" class="btn-submit" id="submitBtn">送信する</button>
+                            <button type="submit" class="btn-submit" id="submitBtn">上記の内容で送信する</button>
                             <button type="button" class="btn-reset" onclick="document.getElementById('contactForm').reset(); try{grecaptcha.reset();}catch(e){}">リセットする</button>
                         </div>
                         
@@ -185,9 +226,9 @@
 
     <div class="popup-overlay" id="successPopup">
         <div class="popup-content" id="popupContent">
-            <h3><i class="fa-regular fa-circle-check" style="color: #28a745; margin-right: 5px;"></i> 送信完了</h3>
-            <p>メールを送信しました。<br>お問い合わせありがとうございます。<br>担当者より順次ご連絡いたします。</p>
-            <button onclick="closePopupAndTab()" style="margin-top: 15px; padding: 12px 24px; background-color: #0088ff; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s;">この画面を閉じる</button>
+            <h3><i class="fa-regular fa-circle-check" style="color: #28a745; margin-right: 10px; font-size: 28px; vertical-align: middle;"></i>送信完了</h3>
+            <p>メールの送信が完了いたしました。<br>お問い合わせ誠にありがとうございます。<br>担当者より順次ご連絡いたします。</p>
+            <button class="popup-btn" onclick="closePopupAndTab()">この画面を閉じる</button>
         </div>
     </div>
 
@@ -198,23 +239,22 @@
         let isSubmitting = false;
 
         form.addEventListener('submit', function(e) {
-            // reCAPTCHAのチェック確認
-            const recaptchaResponse = document.querySelector('.g-recaptcha-response').value;
-            if (recaptchaResponse === "") {
-                e.preventDefault(); // 送信をストップ
+            // reCAPTCHAが未チェックの場合のストップ処理
+            const recaptchaResponse = document.querySelector('.g-recaptcha-response');
+            if (!recaptchaResponse || recaptchaResponse.value === "") {
+                e.preventDefault(); 
                 alert("セキュリティチェックのため、「私はロボットではありません」にチェックを入れてください。");
                 return;
             }
 
             // 送信ボタンを「送信中...」に変更して二重送信を防止
             submitBtn.textContent = '送信中...';
-            // JavaScriptの実行タイミングのズレで送信自体が止まるのを防ぐため、少し遅らせて無効化
             setTimeout(() => { submitBtn.disabled = true; }, 10);
             
             isSubmitting = true;
         });
 
-        // iframeの読み込み完了時（＝SSGformへの送信処理完了時）にポップアップを表示
+        // iframeの読み込み完了時（＝送信処理完了時）にポップアップを表示
         document.getElementById('hidden_iframe').addEventListener('load', function() {
             if (isSubmitting) {
                 // ポップアップを表示
@@ -223,7 +263,7 @@
                 // フォームをリセット
                 form.reset();
                 if (typeof grecaptcha !== 'undefined') {
-                    grecaptcha.reset(); // reCAPTCHAのチェックを外す
+                    grecaptcha.reset(); 
                 }
                 
                 // ボタンを元に戻す
@@ -236,7 +276,7 @@
         // ポップアップを閉じてタブごと閉じる関数
         function closePopupAndTab() {
             popup.style.display = 'none';
-            window.close(); // タブを閉じる
+            window.close(); 
         }
     </script>
 
