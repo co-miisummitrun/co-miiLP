@@ -214,7 +214,7 @@
             isSubmitting = true;
         });
 
-        // iframeの読み込み完了時（＝SSGformへの送信完了時）にポップアップを表示
+        // iframeの読み込み完了時（＝SSGformへの送信処理完了時）にポップアップを表示
         document.getElementById('hidden_iframe').addEventListener('load', function() {
             if (isSubmitting) {
                 // ポップアップを表示
