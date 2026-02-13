@@ -3,76 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プライバシーポリシー | 株式会社サミットラン</title>
+    <title>AIセラピストco-mii | お問い合わせフォーム</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcgcmosAAAAAEGDcj-9_konQaipYEXHXnoKqHxU"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
-        /* 💡 背景を #c6ffc6（ミントグリーン）に統一 */
-        body { font-family: 'Noto Sans JP', sans-serif; color: #333; line-height: 1.8; margin: 0; padding: 0; background-color: #c6ffc6; }
-        .container { max-width: 800px; margin: 50px auto; background: #fff; padding: 50px 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,115,54,0.1); border-top: 6px solid #007336;}
-        h1 { font-size: 24px; text-align: center; border-bottom: 2px solid #007336; padding-bottom: 15px; margin-bottom: 40px; color: #007336; }
-        h2 { font-size: 18px; margin-top: 40px; margin-bottom: 10px; border-left: 5px solid #ff8c00; padding-left: 15px; color: #333; }
-        p { font-size: 15px; margin-bottom: 15px; color: #555;}
-        ul { padding-left: 20px; font-size: 15px; margin-bottom: 20px; color: #555;}
-        li { margin-bottom: 8px; }
-        header { background-color: #fff; box-shadow: 0 2px 10px rgba(0,115,54,0.08); padding: 20px; text-align: center; }
+        /* 💡 背景全体をご指定の #c6ffc6 に統一 */
+        body { 
+            font-family: 'Noto Sans JP', sans-serif; color: #333; margin: 0; padding: 0; 
+            background-color: #c6ffc6; 
+            letter-spacing: 0.03em;
+        }
+        * { box-sizing: border-box; }
+
+        header { background-color: #fff; box-shadow: 0 2px 10px rgba(0,115,54,0.08); padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100;}
         .logo { font-size: 24px; font-weight: 900; color: #007336; text-decoration: none; letter-spacing: 0.05em; }
-        footer { text-align: center; padding: 30px 0 50px; font-size: 14px; color: #666; margin-top: 20px;}
-        .btn-close { display: block; width: 220px; margin: 50px auto 0; padding: 15px; background: #007336; color: #fff; text-align: center; border-radius: 50px; font-weight: bold; cursor: pointer; border: none; font-size: 15px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,115,54,0.3);}
-        .btn-close:hover { background: #005a2a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,115,54,0.4);}
+
+        .form-section { padding: 60px 20px 80px; }
+        
+        /* フォームを美しいカードとして見せる */
+        .form-container { 
+            max-width: 800px; margin: 0 auto; background: #fff; padding: 60px 50px; 
+            border-radius: 20px; box-shadow: 0 15px 40px rgba(0,115,54,0.1); 
+            border-top: 6px solid #007336;
+        }
+        
+        .form-title { font-size: 24px; font-weight: 900; margin-top: 0; margin-bottom: 40px; color: #333; text-align: center; }
+        
+        .form-group { display: flex; margin-bottom: 25px; align-items: center; }
+        .form-group > label { width: 250px; font-size: 15px; font-weight: bold; color: #444; flex-shrink: 0; }
+        .form-group .req { color: #e74c3c; margin-left: 5px; font-size: 13px; vertical-align: top;}
+        
+        .form-input-box { flex: 1; display: flex; align-items: center; }
+        
+        /* 入力エリアのモダン化 */
+        .form-input-box input[type="text"],
+        .form-input-box input[type="email"],
+        .form-input-box input[type="tel"],
+        .form-input-box select,
+        .form-input-box textarea {
+            width: 100%; max-width: 450px; padding: 12px 15px; border: 1px solid #dcdcdc;
+            border-radius: 8px; font-size: 15px; background-color: #fafafa; transition: 0.3s;
+            font-family: inherit; color: #333;
+        }
+        
+        /* フォーカス時（入力中）に緑色に光るエフェクト */
+        .form-input-box input:focus, .form-input-box select:focus, .form-input-box textarea:focus {
+            background-color: #fff; border-color: #007336; outline: none; box-shadow: 0 0 0 4px rgba(0,115,54,0.15);
+        }
+        
+        .form-input-box textarea { height: 120px; resize: vertical; }
+        
+        .form-group.align-top { align-items: flex-start; }
+        .form-group.align-top > label { margin-top: 12px; }
+
+        .privacy-check { display: flex; align-items: center; font-size: 15px; margin-bottom: 30px; margin-top: 15px; font-weight: bold;}
+        .privacy-check input { margin-right: 8px; cursor: pointer; width: 18px; height: 18px; accent-color: #007336; }
+        .privacy-check a { color: #007336; text-decoration: underline; }
+
+        .form-buttons { display: flex; gap: 15px; margin-top: 10px; }
+        .btn-submit { 
+            background: linear-gradient(135deg, #ff9a2e 0%, #ff8c00 100%); color: #fff; border: none; 
+            padding: 15px 40px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; 
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(255,140,0,0.3);
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,140,0,0.4); background: linear-gradient(135deg, #ffaa4d 0%, #ff9d22 100%); }
+        .btn-submit:disabled { background: #bbb; box-shadow: none; cursor: not-allowed; transform: none; }
+        
+        .btn-reset { 
+            background-color: #fff; color: #666; border: 1px solid #ccc; padding: 15px 30px; 
+            font-size: 15px; font-weight: bold; border-radius: 50px; cursor: pointer; transition: 0.3s; 
+        }
+        .btn-reset:hover { background-color: #f1f1f1; border-color: #aaa; }
+
+        /* 送信完了ポップアップ */
+        .popup-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .popup-content {
+            background-color: #fff; padding: 50px 40px; border-radius: 20px; text-align: center;
+            max-width: 450px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            animation: popIn 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        
+        .popup-content h3 { font-size: 26px; color: #333; margin-top: 0; margin-bottom: 20px; }
+        .popup-content p { font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 30px; }
+        .popup-btn { 
+            padding: 15px 30px; background-color: #007336; color: white; border: none; border-radius: 30px; 
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,115,54,0.3);
+        }
+        .popup-btn:hover { background-color: #005a2a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,115,54,0.4);}
+
         @media (max-width: 768px) {
-            .container { margin: 30px 20px; padding: 40px 25px; }
+            .form-container { padding: 40px 20px; border-radius: 16px; }
+            .form-group { flex-direction: column; align-items: flex-start; margin-bottom: 20px;}
+            .form-group > label { width: 100%; margin-bottom: 8px; }
+            .form-input-box { width: 100%; }
+            .form-input-box input[type="text"], .form-input-box input[type="email"],
+            .form-input-box input[type="tel"], .form-input-box select, .form-input-box textarea { max-width: 100%; }
+            .desktop-only { display: none; }
+            .form-buttons { flex-direction: column; width: 100%; }
+            .btn-submit, .btn-reset { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="logo">AIセラピスト co-mii</a>
-</header>
+    <header>
+        <a href="index.html" class="logo">AIセラピスト co-mii</a>
+    </header>
 
-<div class="container">
-    <h1>プライバシーポリシー<br><span style="font-size: 14px; font-weight: normal; color: #666;">（個人情報保護方針）</span></h1>
-    
-    <p>株式会社サミットラン（以下「当社」）は、当社が提供するサービス「AIセラピスト co-mii」および関連事業において、お客様の個人情報保護の重要性を深く認識し、以下のプライバシーポリシー（以下「本ポリシー」）に従い、適切な取扱いおよび保護に努めます。</p>
+    <section class="form-section">
+        <div class="form-container">
+            <h2 class="form-title">お問い合わせ・資料請求フォーム</h2>
+            
+            <form id="contactForm" action="https://ssgform.com/s/THAz3NmzXbPU" method="POST" target="hidden_iframe">
+                
+                <div class="form-group">
+                    <label>会社<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="会社" required placeholder="例：株式会社サミットラン"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>お名前<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="お名前" required placeholder="例：山田 太郎"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>電話番号<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="tel" name="電話番号" required placeholder="例：03-1234-5678"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>メール<span class="req">*</span></label>
+                    <div class="form-input-box" style="gap: 10px;">
+                        <input type="email" name="email" required style="flex: 1; max-width: 410px;" placeholder="例：info@example.com">
+                        <i class="fa-regular fa-circle-question" style="color: #ccc; font-size: 20px;" title="半角英数字で入力してください"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>連絡の取れやすい時間帯<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="連絡の取れやすい時間帯" required>
+                            <option value="">選択してください</option>
+                            <option value="いつでも">いつでも</option>
+                            <option value="午前中">午前中</option>
+                            <option value="午後">午後</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>ご住所<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="ご住所" required placeholder="都道府県・市区町村・番地"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>問い合わせ内容<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="問い合わせ内容" required>
+                            <option value="">選択してください</option>
+                            <option value="資料請求">資料請求</option>
+                            <option value="オンライン説明会希望">オンライン説明会希望</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>問い合わせのきっかけ<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="問い合わせのきっかけ" required>
+                            <option value="">選択してください</option>
+                            <option value="Web検索">Web検索</option>
+                            <option value="SNS">SNS</option>
+                            <option value="知人の紹介">知人の紹介</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>その他のきっかけ</label>
+                    <div class="form-input-box"><input type="text" name="その他のきっかけ"></div>
+                </div>
+                
+                <div class="form-group align-top">
+                    <label>備考欄</label>
+                    <div class="form-input-box"><textarea name="備考欄" placeholder="ご質問やご要望があればご記入ください"></textarea></div>
+                </div>
 
-    <h2>1. 個人情報の収集・利用目的</h2>
-    <p>当社は、お客様からご提供いただいた個人情報（氏名、会社名、電話番号、メールアドレス等）を、以下の目的の範囲内で利用いたします。</p>
-    <ul>
-        <li>本サービスに関するお問い合わせ、資料請求への対応</li>
-        <li>オンライン説明会およびデモンストレーションのご案内・実施</li>
-        <li>当社が提供するサービスのご案内、有益な情報（メルマガ等）の提供</li>
-        <li>サービスの改善、新サービスの開発に向けた調査および分析</li>
-    </ul>
+                <div class="form-group align-top">
+                    <label class="desktop-only"></label>
+                    <div class="form-input-box" style="flex-direction: column; align-items: flex-start;">
+                        
+                        <div class="privacy-check">
+                            <input type="checkbox" id="privacy-check" required>
+                            <label for="privacy-check"><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する。</label>
+                        </div>
 
-    <h2>2. 個人情報の第三者への開示・提供</h2>
-    <p>当社は、以下の場合を除き、お客様の同意を得ることなく個人情報を第三者に開示・提供することはいたしません。</p>
-    <ul>
-        <li>法令に基づく場合</li>
-        <li>人の生命、身体または財産の保護のために必要がある場合であり、本人の同意を得ることが困難であるとき</li>
-        <li>利用目的の達成に必要な範囲内で、個人情報の取扱いの全部または一部を委託する場合</li>
-    </ul>
+                        <div class="g-recaptcha" data-sitekey="6LcgcmosAAAAAEGDcj-9_konQaipYEXHXnoKqHxU" style="margin-bottom: 25px;"></div>
 
-    <h2>3. 個人情報の安全管理</h2>
-    <p>当社は、個人情報の漏洩、滅失、き損および不正アクセスの防止その他の安全管理のために、必要かつ適切なセキュリティ対策を講じます。</p>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit" id="submitBtn">上記の内容で送信する</button>
+                            <button type="button" class="btn-reset" onclick="document.getElementById('contactForm').reset(); try{grecaptcha.reset();}catch(e){}">リセットする</button>
+                        </div>
+                        
+                    </div>
+                </div>
 
-    <h2>4. 個人情報の開示・訂正・削除</h2>
-    <p>お客様からご自身の個人情報に関する開示、訂正、利用停止、削除等のご請求があった場合には、ご本人であることを確認の上、法令に従い速やかに対応いたします。</p>
+            </form>
+        </div>
+    </section>
 
-    <h2>5. プライバシーポリシーの変更</h2>
-    <p>当社は、必要に応じて本ポリシーの内容を変更することがあります。変更後のプライバシーポリシーは、当社のウェブサイトに掲載した時点より効力を生じるものとします。</p>
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-    <h2>6. お問い合わせ窓口</h2>
-    <p>本ポリシーに関するお問い合わせ、または個人情報の取扱いに関するご相談につきましては、お問い合わせフォームよりご連絡ください。</p>
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup-content" id="popupContent">
+            <h3><i class="fa-regular fa-circle-check" style="color: #28a745; margin-right: 10px; font-size: 28px; vertical-align: middle;"></i>送信完了</h3>
+            <p>メールの送信が完了いたしました。<br>お問い合わせ誠にありがとうございます。<br>担当者より順次ご連絡いたします。</p>
+            <button class="popup-btn" onclick="closePopupAndTab()">この画面を閉じる</button>
+        </div>
+    </div>
 
-    <button class="btn-close" onclick="window.close()">この画面を閉じる</button>
+    <script>
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const popup = document.getElementById('successPopup');
+        let isSubmitting = false;
 
-</div>
+        form.addEventListener('submit', function(e) {
+            const recaptchaResponse = document.querySelector('.g-recaptcha-response');
+            if (!recaptchaResponse || recaptchaResponse.value === "") {
+                e.preventDefault(); 
+                alert("セキュリティチェックのため、「私はロボットではありません」にチェックを入れてください。");
+                return;
+            }
 
-<footer>
-    &copy; Summit Run Co., Ltd. All Rights Reserved.
-</footer>
+            submitBtn.textContent = '送信中...';
+            setTimeout(() => { submitBtn.disabled = true; }, 10);
+            
+            isSubmitting = true;
+        });
+
+        document.getElementById('hidden_iframe').addEventListener('load', function() {
+            if (isSubmitting) {
+                popup.style.display = 'flex';
+                
+                form.reset();
+                if (typeof grecaptcha !== 'undefined') {
+                    grecaptcha.reset(); 
+                }
+                
+                submitBtn.textContent = '上記の内容で送信する';
+                submitBtn.disabled = false;
+                isSubmitting = false;
+            }
+        });
+
+        function closePopupAndTab() {
+            popup.style.display = 'none';
+            window.close(); 
+        }
+    </script>
 
 </body>
 </html>
