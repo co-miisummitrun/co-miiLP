@@ -53,10 +53,66 @@
             color: var(--primary-color);
             line-height: 1.4;
         }
+        .section-title.left { text-align: center; }
+        @media (min-width: 768px) {
+            .section-title.left { text-align: left; }
+        }
 
         .highlight {
             background: linear-gradient(transparent 60%, #fff59d 60%);
             font-weight: 900;
+        }
+
+        /* =========================================
+           共通2カラムレイアウト（画像とテキスト）
+        ========================================= */
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        .flex-content {
+            flex: 1;
+            text-align: center;
+        }
+        .flex-image {
+            width: 100%;
+            max-width: 350px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .flex-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        @media (min-width: 768px) {
+            .flex-container { flex-direction: row; justify-content: space-between; }
+            .flex-container.reverse { flex-direction: row-reverse; }
+            .flex-content { text-align: left; }
+        }
+
+        /* =========================================
+           YouTube動画セクション
+        ========================================= */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9アスペクト比 */
+            height: 0;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            background-color: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         /* =========================================
@@ -68,9 +124,9 @@
             justify-content: center;
             background-color: var(--accent-color);
             color: var(--white);
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
-            padding: 18px 32px;
+            padding: 16px 24px;
             border-radius: 50px;
             box-shadow: 0 4px 6px rgba(255, 122, 0, 0.3);
             transition: all 0.3s ease;
@@ -89,18 +145,16 @@
             border: 2px solid var(--primary-color);
             box-shadow: none;
         }
-        .btn-outline:hover {
-            background-color: var(--secondary-color);
-        }
+        .btn-outline:hover { background-color: var(--secondary-color); }
         .btn-wrap {
             display: flex;
             flex-direction: column;
             gap: 15px;
             align-items: center;
-            margin-top: 40px;
+            margin-top: 30px;
         }
         @media (min-width: 768px) {
-            .btn-wrap { flex-direction: row; justify-content: center; }
+            .btn-wrap { flex-direction: row; justify-content: flex-start; }
         }
 
         /* =========================================
@@ -119,11 +173,7 @@
             align-items: center;
             height: 70px;
         }
-        .logo {
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--primary-color);
-        }
+        .logo { font-size: 22px; font-weight: 900; color: var(--primary-color); }
         .header-btn {
             background-color: var(--accent-color);
             color: var(--white);
@@ -141,43 +191,28 @@
         .hero {
             background: linear-gradient(135deg, #e6f0fa 0%, #ffffff 100%);
             padding: 60px 0 80px;
-            text-align: center;
         }
         .badges {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
+        @media (min-width: 768px) { .badges { justify-content: flex-start; } }
         .badge {
             background-color: var(--white);
             color: var(--primary-color);
             border: 2px solid var(--primary-color);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
         }
         .badge i { color: #f1c40f; margin-right: 5px; }
-        .hero h1 {
-            font-size: 32px;
-            font-weight: 900;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            color: #111;
-        }
-        .hero h1 .large {
-            font-size: 48px;
-            color: #d32f2f;
-            display: inline-block;
-        }
-        .hero-sub {
-            font-size: 16px;
-            font-weight: 700;
-            color: #555;
-            margin-bottom: 10px;
-        }
+        .hero h1 { font-size: 28px; font-weight: 900; line-height: 1.5; margin-bottom: 20px; color: #111; }
+        .hero h1 .large { font-size: 44px; color: #d32f2f; display: inline-block; }
+        .hero-sub { font-size: 16px; font-weight: 700; color: #555; margin-bottom: 15px; }
 
         /* =========================================
            共感・課題提起
@@ -201,7 +236,7 @@
         }
         .problem-box li:last-child { margin-bottom: 0; }
         .problem-box li::before {
-            content: '\f14a'; /* FontAwesome Check Square */
+            content: '\f14a';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: #ff4d4d;
@@ -210,31 +245,8 @@
             top: 2px;
             font-size: 24px;
         }
-        .problem-text {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 40px;
-            line-height: 1.8;
-        }
-        .problem-conclusion {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--primary-color);
-            margin-top: 20px;
-        }
-
-        /* =========================================
-           サービス概要
-        ========================================= */
-        .about p {
-            font-size: 18px;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
+        .problem-text { text-align: center; font-size: 18px; font-weight: 700; margin-top: 40px; line-height: 1.8; }
+        .problem-conclusion { text-align: center; font-size: 24px; font-weight: 900; color: var(--primary-color); margin-top: 20px; }
 
         /* =========================================
            4つの理由（特徴）
@@ -265,141 +277,31 @@
             color: var(--primary-color);
             font-size: 48px;
         }
-        .feature-num {
-            display: inline-block;
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: 900;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .feature-card h3 {
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        .feature-card p {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.8;
-        }
+        .feature-num { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 16px; border-radius: 20px; font-weight: 900; font-size: 14px; margin-bottom: 15px; }
+        .feature-card h3 { font-size: 22px; font-weight: 900; color: var(--primary-color); margin-bottom: 20px; line-height: 1.5; }
+        .feature-card p { font-size: 16px; color: #555; line-height: 1.8; }
 
         /* =========================================
-           導入施設様の声
+           導入施設様の声・FAQ・フロー
         ========================================= */
-        .voice-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        @media (min-width: 768px) {
-            .voice-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        .voice-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            border-top: 5px solid var(--accent-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            position: relative;
-        }
-        .voice-card::before {
-            content: '\f10e'; /* FontAwesome Quote */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--secondary-color);
-            font-size: 40px;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            opacity: 0.5;
-        }
-        .voice-name {
-            font-weight: 900;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 16px;
-            padding-right: 30px;
-        }
-        .voice-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #444;
-        }
+        .voice-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .voice-grid { grid-template-columns: repeat(3, 1fr); } }
+        .voice-card { background: var(--white); padding: 30px; border-radius: 12px; border-top: 5px solid var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; }
+        .voice-card::before { content: '\f10e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); font-size: 40px; position: absolute; top: 20px; right: 20px; opacity: 0.5; }
+        .voice-name { font-weight: 900; color: var(--primary-color); margin-bottom: 15px; font-size: 16px; padding-right: 30px; }
+        .voice-text { font-size: 15px; line-height: 1.7; color: #444; }
 
-        /* =========================================
-           FAQ
-        ========================================= */
         .faq-list { max-width: 800px; margin: 0 auto; }
-        .faq-item {
-            background: var(--white);
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .faq-q {
-            font-weight: 900;
-            font-size: 18px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            display: flex;
-            gap: 15px;
-        }
+        .faq-item { background: var(--white); border-radius: 8px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .faq-q { font-weight: 900; font-size: 18px; color: var(--primary-color); margin-bottom: 15px; display: flex; gap: 15px; }
         .faq-q i { color: var(--accent-color); font-size: 22px; margin-top: 2px; }
-        .faq-a {
-            font-size: 16px;
-            color: #444;
-            display: flex;
-            gap: 15px;
-            line-height: 1.8;
-        }
+        .faq-a { font-size: 16px; color: #444; display: flex; gap: 15px; line-height: 1.8; }
         .faq-a i { color: #ccc; font-size: 22px; margin-top: 2px; }
 
-        /* =========================================
-           ご利用までの流れ
-        ========================================= */
         .flow-container { max-width: 800px; margin: 0 auto; }
-        .flow-step {
-            display: flex;
-            align-items: center;
-            background: var(--white);
-            padding: 20px 30px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            position: relative;
-        }
-        .flow-step:not(:last-child)::after {
-            content: '\f0d7'; /* FontAwesome Caret Down */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--primary-color);
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            z-index: 1;
-        }
-        .step-num {
-            background: var(--primary-color);
-            color: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 24px;
-            margin-right: 25px;
-            flex-shrink: 0;
-        }
+        .flow-step { display: flex; align-items: center; background: var(--white); padding: 20px 30px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; }
+        .flow-step:not(:last-child)::after { content: '\f0d7'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-color); position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 24px; z-index: 1; }
+        .step-num { background: var(--primary-color); color: var(--white); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 24px; margin-right: 25px; flex-shrink: 0; }
         .step-text { font-size: 18px; font-weight: 900; }
         .step-desc { font-size: 14px; color: #666; font-weight: normal; margin-top: 5px; }
 
@@ -409,40 +311,28 @@
         .closing {
             background: linear-gradient(135deg, var(--primary-color) 0%, #003d82 100%);
             color: var(--white);
-            text-align: center;
-            padding: 100px 0;
+            padding: 80px 0;
         }
-        .closing .section-title { color: var(--white); margin-bottom: 30px; }
-        .closing p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            font-weight: 700;
-            line-height: 1.8;
-        }
+        .closing .section-title { color: var(--white); margin-bottom: 25px; }
+        .closing p { font-size: 18px; margin-bottom: 30px; font-weight: 700; line-height: 1.8; }
 
         /* =========================================
            フッター
         ========================================= */
-        footer {
-            background-color: #222222;
-            color: #dddddd;
-            text-align: center;
-            padding: 40px 0;
-            font-size: 14px;
-        }
+        footer { background-color: #222222; color: #dddddd; text-align: center; padding: 40px 0; font-size: 14px; }
         footer a { color: #dddddd; margin: 0 15px; transition: 0.3s; }
         footer a:hover { color: var(--white); }
         .copyright { margin-top: 20px; font-size: 12px; color: #888888; }
 
         /* =========================================
-           レスポンシブ（スマホ用調整）
+           スマホ用微調整
         ========================================= */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 26px; }
-            .hero h1 .large { font-size: 36px; }
+        @media (max-width: 767px) {
+            .hero h1 { font-size: 24px; }
+            .hero h1 .large { font-size: 34px; }
             .section-title { font-size: 24px; margin-bottom: 30px; }
             .problem-box li { font-size: 16px; padding-left: 30px; }
-            .btn { font-size: 16px; padding: 14px 20px; width: 100%; }
+            .btn { font-size: 15px; padding: 14px 15px; width: 100%; }
             header .header-btn { display: none; }
             .flow-step { padding: 15px 20px; }
             .step-num { width: 40px; height: 40px; font-size: 18px; margin-right: 15px; }
@@ -459,26 +349,31 @@
     </header>
 
     <section class="hero">
-        <div class="container">
-            <div class="badges">
-                <span class="badge"><i class="fa-solid fa-crown"></i> 令和6年報酬改定「5領域」完全対応！</span>
-                <span class="badge"><i class="fa-solid fa-crown"></i> 専門的支援実施加算の取得を強力サポート</span>
-                <span class="badge"><i class="fa-solid fa-crown"></i> 脳科学者 × ベテラン作業療法士 監修</span>
-            </div>
-            
-            <p class="hero-sub">児童発達支援・放課後等デイサービス向け 支援システム『AIセラピストco-mii』</p>
-            <h1>
-                「個別支援計画書」の作成時間を<br>
-                <span class="large">約90%削減！</span><br>
-            </h1>
-            <p style="font-size: 22px; font-weight: 900; margin-bottom: 20px;">
-                AIが導く根拠あるアセスメントで、<br>子どもと向き合う時間を取り戻す。
-            </p>
-            <p style="font-weight: normal;">属人化しがちなアセスメントから計画書作成、日々の療育メニューの提案まで、AIがワンストップでサポートします。</p>
+        <div class="container flex-container">
+            <div class="flex-content">
+                <div class="badges">
+                    <span class="badge"><i class="fa-solid fa-crown"></i> 令和6年「5領域」完全対応！</span>
+                    <span class="badge"><i class="fa-solid fa-crown"></i> 専門的支援実施加算をサポート</span>
+                </div>
+                
+                <p class="hero-sub">児童発達支援・放課後等デイサービス向け 支援システム</p>
+                <h1>
+                    「個別支援計画書」の作成を<br>
+                    <span class="large">約90%削減！</span><br>
+                </h1>
+                <p style="font-size: 20px; font-weight: 900; margin-bottom: 20px; line-height: 1.5;">
+                    AIが導く根拠あるアセスメントで、<br>子どもと向き合う時間を取り戻す。
+                </p>
+                <p style="font-weight: normal; margin-bottom: 30px;">属人化しがちなアセスメントから計画書作成、日々の療育メニューの提案まで、AIがワンストップでサポートします。</p>
 
-            <div class="btn-wrap">
-                <a href="#cta" class="btn"><i class="fa-solid fa-file-pdf"></i> 1分で完了！無料資料をダウンロード 〉</a>
-                <a href="#cta" class="btn btn-outline"><i class="fa-solid fa-desktop"></i> 実際の画面が見られる！無料オンライン説明会 〉</a>
+                <div class="btn-wrap">
+                    <a href="#cta" class="btn"><i class="fa-solid fa-file-pdf"></i> 無料資料ダウンロード 〉</a>
+                    <a href="#cta" class="btn btn-outline"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
+                </div>
+            </div>
+
+            <div class="flex-image">
+                <img src="image1.png" alt="AIセラピストco-mii キャラクター">
             </div>
         </div>
     </section>
@@ -506,17 +401,32 @@
         </div>
     </section>
 
-    <section class="about">
+    <section>
         <div class="container">
-            <h2 class="section-title">療育を支える、頼れるAIパートナー。<br>「AIセラピスト co-mii」とは？</h2>
-            <p>
-                co-miiは、脳科学者やベテラン作業療法士の知見を学習したAIが、児童の特性を精密に分析し、質の高い支援計画の半自動作成と日々の療育をサポートする業界初のシステムです。<br><br>
-                単なる事務効率化ツールではなく、「できる活動に子どもたちを合わせる」のではなく、<span class="highlight">「子どもたちに活動を合わせる」</span>、真の個別最適化された療育の実現を後押しします。
-            </p>
+            <h2 class="section-title">動画でわかる！AIセラピスト co-mii</h2>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/7vISoTo8Wgg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
         </div>
     </section>
 
-    <section class="bg-light">
+    <section class="bg-light about">
+        <div class="container flex-container reverse">
+            <div class="flex-content">
+                <h2 class="section-title left">療育を支える、頼れるAIパートナー。<br>「AIセラピスト co-mii」とは？</h2>
+                <p>
+                    co-miiは、脳科学者やベテラン作業療法士の知見を学習したAIが、児童の特性を精密に分析し、質の高い支援計画の半自動作成と日々の療育をサポートする業界初のシステムです。<br><br>
+                    単なる事務効率化ツールではなく、「できる活動に子どもたちを合わせる」のではなく、<span class="highlight">「子どもたちに活動を合わせる」</span>、真の個別最適化された療育の実現を後押しします。
+                </p>
+            </div>
+
+            <div class="flex-image">
+                <img src="image2.png" alt="AIがアセスメントをサポート">
+            </div>
+        </div>
+    </section>
+
+    <section>
         <div class="container">
             <h2 class="section-title">co-miiが選ばれる4つの理由</h2>
 
@@ -526,9 +436,7 @@
                     <h3>5領域を網羅！AIによる客観的で緻密な「発達特性アセスメント」</h3>
                     <p>認知、感覚、社会性など7つの分野ごとに「はい or いいえ」で回答するだけの簡単な診断テストを実施。AIが子ども一人ひとりの特性を分析し、レーダーチャートで視覚的にわかりやすく結果を提示します。専門知識がなくても、属人化しない精度の高いアセスメントが可能です。</p>
                 </div>
-                <div class="feature-img">
-                    <i class="fa-solid fa-chart-pie"></i>
-                    </div>
+                <div class="feature-img"><i class="fa-solid fa-chart-pie"></i></div>
             </div>
 
             <div class="feature-card">
@@ -537,9 +445,7 @@
                     <h3>個別支援計画書を「半自動」で作成！（作成時間を約90%削減）</h3>
                     <p>アセスメント結果に応じて、5領域（健康・生活、運動・感覚、認知・行動、言語・コミュニケーション、人間関係・社会性）ごとの支援目標をAIが自動設定し、個別支援計画書に反映します。これまで児童1人あたり約4時間かかっていた作成業務を大幅にショートカット。次回の更新時に便利なモニタリング機能も搭載しています。</p>
                 </div>
-                <div class="feature-img">
-                    <i class="fa-solid fa-file-signature"></i>
-                    </div>
+                <div class="feature-img"><i class="fa-solid fa-file-signature"></i></div>
             </div>
 
             <div class="feature-card">
@@ -548,9 +454,7 @@
                     <h3>診断結果に合わせた「日々の療育メニュー」を提案</h3>
                     <p>「今日は何をしよう…」と悩む必要はありません。アセスメント結果に基づき、500種類以上の豊富な療育メニューの中から「今、優先して取り組むべきトレーニング」をAIが提案。スタッフ向けの指導マニュアルも充実しており、誰でも質の高い療育を日々実践できます。保護者への報告に使える日報機能も搭載。</p>
                 </div>
-                <div class="feature-img">
-                    <i class="fa-solid fa-puzzle-piece"></i>
-                    </div>
+                <div class="feature-img"><i class="fa-solid fa-puzzle-piece"></i></div>
             </div>
 
             <div class="feature-card">
@@ -559,29 +463,23 @@
                     <h3>令和6年報酬改定対応！「専門的支援実施加算」の取得を強力サポート</h3>
                     <p>加算の取得に必要な「専門的支援実施計画書」も、アセスメント結果から半自動で作成できます。5年以上の実務経験を持つ「保育士」や「児童指導員」でも、co-miiを活用することで要件を満たしやすく、事業所の収益アップ（専門的支援体制加算と合わせて546単位/月・1人 ※条件あり）に大きく貢献します。</p>
                 </div>
-                <div class="feature-img">
-                    <i class="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
+                <div class="feature-img"><i class="fa-solid fa-hand-holding-dollar"></i></div>
             </div>
-
         </div>
     </section>
 
-    <section>
+    <section class="bg-light">
         <div class="container">
             <h2 class="section-title">全国の事業所で、<br>業務改善と支援の質向上が起きています！</h2>
-            
             <div class="voice-grid">
                 <div class="voice-card">
                     <div class="voice-name">大分県 / 放課後等デイサービス 多機能型元気ハウス 様</div>
                     <div class="voice-text">「『診断』から『個別支援計画書』を作成する過程に、5領域を網羅した緻密なアセスメントがあるため、スタッフのスキルアップにも繋がり大助かりです。時短ができたことで施設内の雰囲気も良くなり、重宝しています！」</div>
                 </div>
-
                 <div class="voice-card">
                     <div class="voice-name">神奈川県 / 放課後等デイサービス ひかりのにわ 様</div>
                     <div class="voice-text">「今まで児発管の個々の能力で差が出ていた計画書が、一定の水準で作れるようになりました。あいまいな評価に基づかず、根拠あるアセスメントを実施できるので、事業所としての支援レベルを維持しやすくなっています。」</div>
                 </div>
-
                 <div class="voice-card">
                     <div class="voice-name">東京都 / 放課後等デイサービス すとれいとぱぁそんず 様</div>
                     <div class="voice-text">「『根拠のある療育』を提供するために導入しました。日報機能もあり、一人ひとりに合わせた適切な支援を自信を持って保護者様に説明できるようになり、大変ご好評をいただいています。」</div>
@@ -590,21 +488,18 @@
         </div>
     </section>
 
-    <section class="bg-light">
+    <section>
         <div class="container">
             <h2 class="section-title">導入に関するよくあるご質問</h2>
-            
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-q"><i class="fa-solid fa-circle-question"></i> パソコン操作が苦手なスタッフが多いのですが、使いこなせますか？</div>
                     <div class="faq-a"><i class="fa-regular fa-comment-dots"></i> <div>はい、直感的に操作できるシンプルな画面設計になっています。アセスメントも「はい/いいえ」を選ぶだけなので、どなたでも簡単に使いこなせます。導入時の研修などサポート体制も整っております。</div></div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-q"><i class="fa-solid fa-circle-question"></i> AIの診断や計画書に根拠はあるのですか？</div>
                     <div class="faq-a"><i class="fa-regular fa-comment-dots"></i> <div>はい。脳科学者や現場経験豊富なベテラン作業療法士の知見をもとに監修・設計を行っております。話題の生成AIのように適当な文章を作るのではなく、入力データを専門的なロジックで判別・分析するシステムですのでご安心ください。</div></div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-q"><i class="fa-solid fa-circle-question"></i> 独自の療育内容も計画書に記載できますか？</div>
                     <div class="faq-a"><i class="fa-regular fa-comment-dots"></i> <div>可能です。自由記述欄を設けておりますので、事業所様独自の支援内容も柔軟に反映・追記していただけます。</div></div>
@@ -613,66 +508,57 @@
         </div>
     </section>
 
-    <section>
+    <section class="bg-light">
         <div class="container">
             <h2 class="section-title">ご利用までの流れ</h2>
-            
             <div class="flow-container">
                 <div class="flow-step">
                     <div class="step-num">1</div>
-                    <div>
-                        <div class="step-text">お問い合わせ・資料請求</div>
-                        <div class="step-desc">まずはフォームよりお気軽にご連絡ください</div>
-                    </div>
+                    <div><div class="step-text">お問い合わせ・資料請求</div><div class="step-desc">まずはフォームよりお気軽にご連絡ください</div></div>
                 </div>
                 <div class="flow-step">
                     <div class="step-num">2</div>
-                    <div>
-                        <div class="step-text">無料オンライン説明会・デモ</div>
-                        <div class="step-desc">実際の操作画面をお見せしながらご案内します</div>
-                    </div>
+                    <div><div class="step-text">無料オンライン説明会・デモ</div><div class="step-desc">実際の操作画面をお見せしながらご案内します</div></div>
                 </div>
                 <div class="flow-step">
                     <div class="step-num">3</div>
-                    <div>
-                        <div class="step-text">お申し込み・ご契約</div>
-                    </div>
+                    <div><div class="step-text">お申し込み・ご契約</div></div>
                 </div>
                 <div class="flow-step">
                     <div class="step-num">4</div>
-                    <div>
-                        <div class="step-text">導入研修</div>
-                        <div class="step-desc">スタッフ様向けに丁寧な初期レクチャーを実施します</div>
-                    </div>
+                    <div><div class="step-text">導入研修</div><div class="step-desc">スタッフ様向けに丁寧な初期レクチャーを実施します</div></div>
                 </div>
                 <div class="flow-step" style="border: 2px solid var(--accent-color);">
                     <div class="step-num" style="background: var(--accent-color);">5</div>
-                    <div>
-                        <div class="step-text" style="color: var(--accent-color);">ご利用開始！</div>
-                    </div>
+                    <div><div class="step-text" style="color: var(--accent-color);">ご利用開始！</div></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="closing" id="cta">
-        <div class="container">
-            <h2 class="section-title">書類作成のストレスから解放され、<br>子どもたちと「笑顔で向き合う時間」を取り戻しませんか？</h2>
-            <p>
-                個別支援計画書の作成負担を減らし、事業所の「療育の質」と「収益（加算）」を同時にアップさせるAIアシスタント。<br>
-                まずは詳しい料金プランや機能がわかる無料資料をご覧いただくか、実際の画面をお見せするオンライン説明会へお気軽にご参加ください！
-            </p>
-            
-            <div class="btn-wrap">
-                <a href="#" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 1分で完了！無料資料をダウンロード 〉</a>
-                <a href="#" class="btn btn-outline" style="border-color: #fff; color: #fff;"><i class="fa-solid fa-desktop"></i> 実際の画面が見られる！無料オンライン説明会 〉</a>
+        <div class="container flex-container">
+            <div class="flex-content">
+                <h2 class="section-title left" style="color: #fff;">書類作成のストレスから解放され、<br>子どもたちと「笑顔で向き合う時間」を取り戻しませんか？</h2>
+                <p>
+                    個別支援計画書の作成負担を減らし、事業所の「療育の質」と「収益」を同時にアップ。<br>
+                    まずは詳しい料金プランや機能がわかる無料資料をご覧いただくか、実際の画面をお見せするオンライン説明会へお気軽にご参加ください！
+                </p>
+                <div class="btn-wrap">
+                    <a href="#" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 無料資料をダウンロード 〉</a>
+                    <a href="#" class="btn btn-outline" style="border-color: #fff; color: #fff;"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
+                </div>
+            </div>
+
+            <div class="flex-image">
+                <img src="image3.png" alt="お問い合わせをお待ちしております">
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p style="margin-bottom: 15px; font-weight: bold;">運営会社：株式会社サミットラン</p>
+            <p style="margin-bottom: 15px; font-weight: bold; font-size: 16px;">運営会社：株式会社サミットラン</p>
             <div>
                 <a href="#">会社概要</a> | 
                 <a href="#">プライバシーポリシー</a> | 
