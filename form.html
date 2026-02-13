@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIセラピストco-mii | 資料請求フォーム</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f8e8; /* 画像通りの淡いグリーン背景 */
+        }
+        * { box-sizing: border-box; }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 20px;
+            text-align: center;
+        }
+        .logo { font-size: 22px; font-weight: 900; color: #0056b3; }
+
+        .form-section { padding: 50px 20px 80px; }
+        .form-container { max-width: 800px; margin: 0 auto; }
+        .form-title { font-size: 18px; font-weight: 900; margin-bottom: 35px; color: #000; }
+        
+        .form-group { display: flex; margin-bottom: 15px; align-items: center; }
+        .form-group > label { width: 250px; font-size: 14px; color: #000; flex-shrink: 0; }
+        .form-group .req { color: #e00; margin-left: 2px; } /* 必須マークの赤文字 */
+        
+        .form-input-box { flex: 1; display: flex; align-items: center; }
+        .form-input-box input[type="text"],
+        .form-input-box input[type="email"],
+        .form-input-box input[type="tel"],
+        .form-input-box select,
+        .form-input-box textarea {
+            width: 100%; max-width: 400px; padding: 6px 10px; border: 1px solid #ccc;
+            border-radius: 2px; font-size: 14px; background-color: #fff;
+        }
+        .form-input-box textarea { height: 80px; resize: vertical; }
+        
+        .form-group.align-top { align-items: flex-start; }
+        .form-group.align-top > label { margin-top: 6px; }
+
+        .privacy-check { display: flex; align-items: center; font-size: 14px; margin-bottom: 25px; margin-top: 10px; }
+        .privacy-check input { margin-right: 5px; cursor: pointer; width: 15px; height: 15px; }
+        .privacy-check a { color: blue; text-decoration: underline; }
+
+        .form-buttons { display: flex; gap: 10px; }
+        .btn-submit {
+            background-color: #0088ff; color: #fff; border: none; padding: 8px 20px;
+            font-size: 14px; font-weight: bold; border-radius: 3px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-submit:hover { background-color: #0066cc; }
+        .btn-reset {
+            background-color: #f1f1f1; color: #333; border: 1px solid #ccc; padding: 8px 16px;
+            font-size: 14px; border-radius: 3px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-reset:hover { background-color: #e2e2e2; }
+
+        /* スマホ用微調整 */
+        @media (max-width: 768px) {
+            .form-group { flex-direction: column; align-items: flex-start; }
+            .form-group > label { width: 100%; margin-bottom: 5px; }
+            .form-input-box { width: 100%; }
+            .form-input-box input[type="text"], .form-input-box input[type="email"],
+            .form-input-box input[type="tel"], .form-input-box select, .form-input-box textarea { max-width: 100%; }
+            .desktop-only { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AIセラピスト co-mii</div>
+    </header>
+
+    <section class="form-section">
+        <div class="form-container">
+            <h2 class="form-title">AIセラピスト co-mii 資料請求フォーム</h2>
+            
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label>会社<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="company" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>お名前<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="name" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>電話番号<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="tel" name="tel" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>メール<span class="req">*</span></label>
+                    <div class="form-input-box" style="gap: 8px;">
+                        <input type="email" name="email" required style="flex: 1; max-width: 370px;">
+                        <i class="fa-regular fa-circle-question" style="color: #bbb; font-size: 18px;"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>連絡の取れやすい時間帯<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="contact-time" required>
+                            <option value="">選択してください</option>
+                            <option value="いつでも">いつでも</option>
+                            <option value="午前中">午前中</option>
+                            <option value="午後">午後</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>ご住所<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="address" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>問い合わせ内容<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="inquiry-type" required>
+                            <option value="">選択してください</option>
+                            <option value="資料請求">資料請求</option>
+                            <option value="オンライン説明会希望">オンライン説明会希望</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>問い合わせのきっかけ<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="trigger" required>
+                            <option value="">選択してください</option>
+                            <option value="Web検索">Web検索</option>
+                            <option value="SNS">SNS</option>
+                            <option value="知人の紹介">知人の紹介</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>その他のきっかけ</label>
+                    <div class="form-input-box"><input type="text" name="trigger-other"></div>
+                </div>
+                
+                <div class="form-group align-top">
+                    <label>備考欄</label>
+                    <div class="form-input-box"><textarea name="memo"></textarea></div>
+                </div>
+
+                <div class="form-group align-top">
+                    <label class="desktop-only"></label>
+                    <div class="form-input-box" style="flex-direction: column; align-items: flex-start;">
+                        
+                        <div class="privacy-check">
+                            <input type="checkbox" id="privacy-check" required>
+                            <label for="privacy-check"><a href="#" target="_blank">プライバシーポリシー</a>に同意する。</label>
+                        </div>
+
+                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" style="margin-bottom: 20px;"></div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit">送信する</button>
+                            <button type="reset" class="btn-reset">リセットする</button>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>
