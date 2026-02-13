@@ -10,24 +10,24 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <style>
-        /* モダンなフォームデザイン */
+        /* 💡 背景全体をご指定の #c6ffc6 に統一 */
         body { 
             font-family: 'Noto Sans JP', sans-serif; color: #333; margin: 0; padding: 0; 
-            background-color: #f4f8fc; /* LPの背景に合わせた洗練された色 */
+            background-color: #c6ffc6; 
             letter-spacing: 0.03em;
         }
         * { box-sizing: border-box; }
 
-        header { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 20px; text-align: center; }
-        .logo { font-size: 24px; font-weight: 900; color: #006aa6; text-decoration: none; letter-spacing: 0.05em; }
+        header { background-color: #fff; box-shadow: 0 2px 10px rgba(0,115,54,0.08); padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100;}
+        .logo { font-size: 24px; font-weight: 900; color: #007336; text-decoration: none; letter-spacing: 0.05em; }
 
         .form-section { padding: 60px 20px 80px; }
         
         /* フォームを美しいカードとして見せる */
         .form-container { 
             max-width: 800px; margin: 0 auto; background: #fff; padding: 60px 50px; 
-            border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.06); 
-            border-top: 6px solid #006aa6;
+            border-radius: 20px; box-shadow: 0 15px 40px rgba(0,115,54,0.1); 
+            border-top: 6px solid #007336;
         }
         
         .form-title { font-size: 24px; font-weight: 900; margin-top: 0; margin-bottom: 40px; color: #333; text-align: center; }
@@ -49,9 +49,9 @@
             font-family: inherit; color: #333;
         }
         
-        /* フォーカス時（入力中）に青く光るエフェクト */
+        /* フォーカス時（入力中）に緑色に光るエフェクト */
         .form-input-box input:focus, .form-input-box select:focus, .form-input-box textarea:focus {
-            background-color: #fff; border-color: #006aa6; outline: none; box-shadow: 0 0 0 4px rgba(0,106,166,0.15);
+            background-color: #fff; border-color: #007336; outline: none; box-shadow: 0 0 0 4px rgba(0,115,54,0.15);
         }
         
         .form-input-box textarea { height: 120px; resize: vertical; }
@@ -60,16 +60,16 @@
         .form-group.align-top > label { margin-top: 12px; }
 
         .privacy-check { display: flex; align-items: center; font-size: 15px; margin-bottom: 30px; margin-top: 15px; font-weight: bold;}
-        .privacy-check input { margin-right: 8px; cursor: pointer; width: 18px; height: 18px; accent-color: #006aa6; }
-        .privacy-check a { color: #006aa6; text-decoration: underline; }
+        .privacy-check input { margin-right: 8px; cursor: pointer; width: 18px; height: 18px; accent-color: #007336; }
+        .privacy-check a { color: #007336; text-decoration: underline; }
 
         .form-buttons { display: flex; gap: 15px; margin-top: 10px; }
         .btn-submit { 
-            background: linear-gradient(135deg, #007bc7 0%, #0056b3 100%); color: #fff; border: none; 
+            background: linear-gradient(135deg, #ff9a2e 0%, #ff8c00 100%); color: #fff; border: none; 
             padding: 15px 40px; font-size: 16px; font-weight: bold; border-radius: 50px; cursor: pointer; 
-            transition: 0.3s; box-shadow: 0 5px 15px rgba(0,106,166,0.3);
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(255,140,0,0.3);
         }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,106,166,0.4); }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,140,0,0.4); background: linear-gradient(135deg, #ffaa4d 0%, #ff9d22 100%); }
         .btn-submit:disabled { background: #bbb; box-shadow: none; cursor: not-allowed; transform: none; }
         
         .btn-reset { 
@@ -78,7 +78,7 @@
         }
         .btn-reset:hover { background-color: #f1f1f1; border-color: #aaa; }
 
-        /* 送信完了ポップアップ（モーダル）のデザイン */
+        /* 送信完了ポップアップ */
         .popup-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;
@@ -94,10 +94,10 @@
         .popup-content h3 { font-size: 26px; color: #333; margin-top: 0; margin-bottom: 20px; }
         .popup-content p { font-size: 16px; line-height: 1.8; color: #555; margin-bottom: 30px; }
         .popup-btn { 
-            padding: 15px 30px; background-color: #006aa6; color: white; border: none; border-radius: 30px; 
-            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,106,166,0.3);
+            padding: 15px 30px; background-color: #007336; color: white; border: none; border-radius: 30px; 
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,115,54,0.3);
         }
-        .popup-btn:hover { background-color: #0056b3; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,106,166,0.4);}
+        .popup-btn:hover { background-color: #005a2a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,115,54,0.4);}
 
         @media (max-width: 768px) {
             .form-container { padding: 40px 20px; border-radius: 16px; }
@@ -208,7 +208,7 @@
                             <label for="privacy-check"><a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する。</label>
                         </div>
 
-                        <div class="g-recaptcha" data-sitekey="6LdRa2osAAAAAN50ze-QGkbzHiF3j-3pAzcmuW9d" style="margin-bottom: 25px;"></div>
+                        <div class="g-recaptcha" data-sitekey="6Lf1YmosAAAAAJb0XXNx1WjR3T3bIdkzvTH3X0p9" style="margin-bottom: 25px;"></div>
 
                         <div class="form-buttons">
                             <button type="submit" class="btn-submit" id="submitBtn">上記の内容で送信する</button>
@@ -239,7 +239,6 @@
         let isSubmitting = false;
 
         form.addEventListener('submit', function(e) {
-            // reCAPTCHAが未チェックの場合のストップ処理
             const recaptchaResponse = document.querySelector('.g-recaptcha-response');
             if (!recaptchaResponse || recaptchaResponse.value === "") {
                 e.preventDefault(); 
@@ -247,33 +246,27 @@
                 return;
             }
 
-            // 送信ボタンを「送信中...」に変更して二重送信を防止
             submitBtn.textContent = '送信中...';
             setTimeout(() => { submitBtn.disabled = true; }, 10);
             
             isSubmitting = true;
         });
 
-        // iframeの読み込み完了時（＝送信処理完了時）にポップアップを表示
         document.getElementById('hidden_iframe').addEventListener('load', function() {
             if (isSubmitting) {
-                // ポップアップを表示
                 popup.style.display = 'flex';
                 
-                // フォームをリセット
                 form.reset();
                 if (typeof grecaptcha !== 'undefined') {
                     grecaptcha.reset(); 
                 }
                 
-                // ボタンを元に戻す
-                submitBtn.textContent = '送信する';
+                submitBtn.textContent = '上記の内容で送信する';
                 submitBtn.disabled = false;
                 isSubmitting = false;
             }
         });
 
-        // ポップアップを閉じてタブごと閉じる関数
         function closePopupAndTab() {
             popup.style.display = 'none';
             window.close(); 
