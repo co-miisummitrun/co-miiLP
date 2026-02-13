@@ -82,16 +82,36 @@
             flex-shrink: 0;
             text-align: center;
         }
-        .flex-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
         @media (min-width: 768px) {
             .flex-container { flex-direction: row; justify-content: space-between; }
             .flex-container.reverse { flex-direction: row-reverse; }
             .flex-content { text-align: left; }
         }
+
+        /* =========================================
+           👑 画像を左右・上下にフワフワ動かすアニメーション
+        ========================================= */
+        @keyframes floating {
+            0%   { transform: translate(-15px, 0px) rotate(-2deg); }
+            50%  { transform: translate(15px, -15px) rotate(2deg); }
+            100% { transform: translate(-15px, 0px) rotate(-2deg); }
+        }
+
+        .floating-img {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+            /* 透過画像のキャラクターの輪郭に沿って自然な影をつける */
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+            /* 5秒かけてフワフワ動くアニメーションを無限ループ */
+            animation: floating 5s ease-in-out infinite;
+        }
+
+        /* 複数ある画像が全く同じ動きをしないようにタイミングをズラす */
+        .delay-1 { animation-delay: 0s; }
+        .delay-2 { animation-delay: -1.5s; }
+        .delay-3 { animation-delay: -3s; }
+
 
         /* =========================================
            YouTube動画セクション
@@ -191,6 +211,7 @@
         .hero {
             background: linear-gradient(135deg, #e6f0fa 0%, #ffffff 100%);
             padding: 60px 0 80px;
+            overflow: hidden; /* アニメーションではみ出ないように設定 */
         }
         .badges {
             display: flex;
@@ -312,6 +333,7 @@
             background: linear-gradient(135deg, var(--primary-color) 0%, #003d82 100%);
             color: var(--white);
             padding: 80px 0;
+            overflow: hidden; /* アニメーションではみ出ないように設定 */
         }
         .closing .section-title { color: var(--white); margin-bottom: 25px; }
         .closing p { font-size: 18px; margin-bottom: 30px; font-weight: 700; line-height: 1.8; }
@@ -373,7 +395,7 @@
             </div>
 
             <div class="flex-image">
-                <img src="co-miichan.png" alt="AIセラピストco-mii キャラクター">
+                <img src="image1.png" alt="AIセラピストco-mii キャラクター" class="floating-img delay-1">
             </div>
         </div>
     </section>
@@ -421,7 +443,7 @@
             </div>
 
             <div class="flex-image">
-                <img src="co-miichan2.png" alt="AIがアセスメントをサポート">
+                <img src="image2.png" alt="AIがアセスメントをサポート" class="floating-img delay-2">
             </div>
         </div>
     </section>
@@ -551,7 +573,7 @@
             </div>
 
             <div class="flex-image">
-                <img src="co-miichan3.png" alt="お問い合わせをお待ちしております">
+                <img src="image3.png" alt="お問い合わせをお待ちしております" class="floating-img delay-3">
             </div>
         </div>
     </section>
