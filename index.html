@@ -16,13 +16,15 @@
         html { scroll-behavior: smooth; }
         
         :root {
-            --primary-color: #006aa6;     /* 信頼感と優しさのあるブルー */
-            --secondary-color: #eaf2f8;   /* 非常に薄いブルー（背景用） */
-            --accent-color: #ff8c00;      /* 温かみのあるオレンジ */
+            /* 💡 全体的な色を緑ベースに統一 */
+            --primary-color: #007336;     /* 信頼感と優しさのある深緑 */
+            --secondary-color: #e0ffe0;   /* より薄いグリーン（画像背景用など） */
+            --accent-color: #ff8c00;      /* 温かみのあるオレンジ（ボタン等） */
             --accent-hover: #e67d00;
             --text-main: #333333;
             --text-light: #555555;
-            --bg-light: #f4f8fc;          /* クリーンなライトグレーブルー */
+            
+            --bg-light: #c6ffc6;          /* ▼ ご指定の明るいグリーン（背景色） */
             --white: #ffffff;
         }
 
@@ -42,6 +44,8 @@
 
         .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
         section { padding: 90px 0; }
+        
+        /* セクション背景をご指定のカラーに */
         .bg-light { background-color: var(--bg-light); }
 
         /* モダンな見出しデザイン */
@@ -81,7 +85,7 @@
         }
         .floating-img {
             width: 100%; display: block; margin: 0 auto;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.12));
+            filter: drop-shadow(0 15px 25px rgba(0,115,54,0.15));
             animation: floating 6s ease-in-out infinite;
         }
         .delay-1 { animation-delay: 0s; }
@@ -94,7 +98,7 @@
         .video-wrapper {
             position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
             max-width: 800px; margin: 0 auto; border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15); background-color: #000;
+            box-shadow: 0 20px 40px rgba(0,115,54,0.15); background-color: #000;
         }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
@@ -112,16 +116,16 @@
             background: linear-gradient(135deg, #ffaa4d 0%, #ff9d22 100%);
         }
         .btn-outline { 
-            background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); box-shadow: 0 4px 10px rgba(0, 106, 166, 0.05); 
+            background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); box-shadow: 0 4px 10px rgba(0, 115, 54, 0.05); 
         }
-        .btn-outline:hover { background-color: var(--secondary-color); box-shadow: 0 6px 15px rgba(0, 106, 166, 0.15); }
+        .btn-outline:hover { background-color: var(--secondary-color); box-shadow: 0 6px 15px rgba(0, 115, 54, 0.15); }
         .btn-wrap { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 35px; }
         @media (min-width: 768px) { .btn-wrap { flex-direction: row; justify-content: flex-start; } }
 
         /* =========================================
            ヘッダー
         ========================================= */
-        header { background-color: rgba(255,255,255,0.95); backdrop-filter: blur(5px); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        header { background-color: rgba(255,255,255,0.95); backdrop-filter: blur(5px); box-shadow: 0 2px 10px rgba(0,115,54,0.08); position: sticky; top: 0; z-index: 100; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; height: 75px; }
         .logo { font-size: 24px; font-weight: 900; color: var(--primary-color); letter-spacing: 0.05em; }
         .header-btn { 
@@ -133,10 +137,10 @@
         /* =========================================
            ファーストビュー（FV）
         ========================================= */
-        .hero { background: linear-gradient(135deg, #eef6fc 0%, #ffffff 100%); padding: 70px 0 90px; overflow: hidden; }
+        .hero { background: linear-gradient(135deg, #f0fff0 0%, var(--bg-light) 100%); padding: 70px 0 90px; overflow: hidden; }
         .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
         @media (min-width: 768px) { .badges { justify-content: flex-start; } }
-        .badge { background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .badge { background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 5px rgba(0,115,54,0.05); }
         .badge i { color: #f1c40f; margin-right: 5px; }
         .hero h1 { font-size: 32px; font-weight: 900; line-height: 1.5; margin-bottom: 25px; color: #111; }
         .hero h1 .large { font-size: 48px; color: #d32f2f; display: inline-block; }
@@ -156,33 +160,33 @@
         /* =========================================
            4つの理由（特徴）
         ========================================= */
-        .feature-card { display: flex; flex-direction: column; gap: 40px; margin-bottom: 70px; background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.3s; }
-        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .feature-card { display: flex; flex-direction: column; gap: 40px; margin-bottom: 70px; background: var(--white); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,115,54,0.08); transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,115,54,0.12); }
         @media (min-width: 768px) {
             .feature-card { flex-direction: row; align-items: stretch; padding: 50px; } 
             .feature-card:nth-child(even) { flex-direction: row-reverse; }
         }
         .feature-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .feature-img { flex: 1; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); min-height: 250px; background-color: var(--secondary-color);}
+        .feature-img { flex: 1; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,115,54,0.1); min-height: 250px; background-color: var(--secondary-color);}
         .feature-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .feature-card:hover .feature-img img { transform: scale(1.05); }
 
-        .feature-num { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 18px; border-radius: 30px; font-weight: 900; font-size: 14px; margin-bottom: 20px; width: fit-content; box-shadow: 0 4px 10px rgba(0,106,166,0.2); }
+        .feature-num { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 18px; border-radius: 30px; font-weight: 900; font-size: 14px; margin-bottom: 20px; width: fit-content; box-shadow: 0 4px 10px rgba(0,115,54,0.2); }
         .feature-card h3 { font-size: 24px; font-weight: 900; color: var(--primary-color); margin-bottom: 20px; line-height: 1.5; }
         .feature-card p { font-size: 16px; color: var(--text-light); line-height: 1.8; margin-bottom: 0;}
 
         /* =========================================
-           導入施設様の声 (画像追加)
+           導入施設様の声
         ========================================= */
         .voice-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
         @media (min-width: 768px) { .voice-grid { grid-template-columns: repeat(3, 1fr); } }
         
         .voice-card { 
             background: var(--white); border-radius: 16px; border-top: 5px solid var(--accent-color); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); overflow: hidden; position: relative;
+            box-shadow: 0 10px 30px rgba(0,115,54,0.08); overflow: hidden; position: relative;
             display: flex; flex-direction: column; transition: transform 0.3s;
         }
-        .voice-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .voice-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,115,54,0.12); }
         
         .voice-img { width: 100%; height: 200px; background-color: var(--secondary-color); overflow: hidden; }
         .voice-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
@@ -200,24 +204,24 @@
            FAQ・フロー
         ========================================= */
         .faq-list { max-width: 800px; margin: 0 auto; }
-        .faq-item { background: var(--white); border-radius: 12px; padding: 30px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); transition: 0.3s; }
-        .faq-item:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .faq-item { background: var(--white); border-radius: 12px; padding: 30px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,115,54,0.06); transition: 0.3s; }
+        .faq-item:hover { box-shadow: 0 8px 30px rgba(0,115,54,0.1); }
         .faq-q { font-weight: 900; font-size: 18px; color: var(--primary-color); margin-bottom: 15px; display: flex; gap: 15px; align-items: flex-start; }
         .faq-q i { color: var(--accent-color); font-size: 24px; margin-top: 2px; flex-shrink: 0;}
         .faq-a { font-size: 16px; color: var(--text-light); display: flex; gap: 15px; line-height: 1.8; align-items: flex-start; }
-        .faq-a i { color: #d0d0d0; font-size: 24px; margin-top: 2px; flex-shrink: 0;}
+        .faq-a i { color: #8fcd8f; font-size: 24px; margin-top: 2px; flex-shrink: 0;}
 
         .flow-container { max-width: 800px; margin: 0 auto; }
-        .flow-step { display: flex; align-items: center; background: var(--white); padding: 25px 35px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); position: relative; }
+        .flow-step { display: flex; align-items: center; background: var(--white); padding: 25px 35px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,115,54,0.06); position: relative; }
         .flow-step:not(:last-child)::after { content: '\f0d7'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-color); position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 28px; z-index: 1; }
-        .step-num { background: var(--primary-color); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 26px; margin-right: 25px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,106,166,0.3); }
+        .step-num { background: var(--primary-color); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 26px; margin-right: 25px; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,115,54,0.3); }
         .step-text { font-size: 20px; font-weight: 900; margin-bottom: 5px; color: var(--text-main); }
         .step-desc { font-size: 15px; color: var(--text-light); font-weight: normal; }
 
         /* =========================================
            クロージング（CTA）
         ========================================= */
-        .closing { background: linear-gradient(135deg, var(--primary-color) 0%, #004573 100%); color: var(--white); padding: 90px 0; overflow: hidden; }
+        .closing { background: linear-gradient(135deg, var(--primary-color) 0%, #004a23 100%); color: var(--white); padding: 90px 0; overflow: hidden; }
         .closing .section-title { color: var(--white); margin-bottom: 30px; }
         .closing .section-title::after { background-color: var(--white); opacity: 0.5; }
         .closing p { font-size: 18px; margin-bottom: 40px; font-weight: 700; line-height: 1.8; opacity: 0.9; }
@@ -225,9 +229,9 @@
         /* =========================================
            フッター
         ========================================= */
-        footer { background-color: #1a1a1a; color: #cccccc; text-align: center; padding: 50px 0 40px; font-size: 14px; }
+        footer { background-color: #1a241e; color: #cccccc; text-align: center; padding: 50px 0 40px; font-size: 14px; }
         footer a { color: #cccccc; margin: 0 15px; transition: 0.3s; }
-        footer a:hover { color: var(--white); text-decoration: underline; }
+        footer a:hover { color: var(--secondary-color); text-decoration: underline; }
         .copyright { margin-top: 25px; font-size: 12px; color: #777777; letter-spacing: 0.05em; }
 
         @media (max-width: 767px) {
