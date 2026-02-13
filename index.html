@@ -32,7 +32,10 @@
         a { text-decoration: none; transition: 0.3s; }
 
         .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 90px 0; }
+        
+        /* ヘッダーの高さ分、リンクでジャンプした時のズレを防止 */
+        section { padding: 90px 0; scroll-margin-top: 75px; }
+        
         .bg-light { background-color: var(--bg-light); }
 
         /* モダンな見出しデザイン */
@@ -45,17 +48,10 @@
         .highlight { background: linear-gradient(transparent 60%, #fff59d 60%); font-weight: 900; padding: 0 4px;}
 
         /* =========================================
-           ✨ 新機能1：スクロール・フェードイン効果
+           スクロール・フェードイン効果
         ========================================= */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.is-visible { opacity: 1; transform: translateY(0); }
         .delay-100 { transition-delay: 0.1s; }
         .delay-200 { transition-delay: 0.2s; }
 
@@ -86,12 +82,25 @@
         .btn-wrap { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 35px; }
         @media (min-width: 768px) { .btn-wrap { flex-direction: row; justify-content: flex-start; } }
 
-        /* ヘッダー */
+        /* =========================================
+           ✨ ヘッダー（トップナビゲーション追加）
+        ========================================= */
         header { background-color: rgba(255,255,255,0.95); backdrop-filter: blur(5px); box-shadow: 0 2px 10px rgba(0,115,54,0.08); position: sticky; top: 0; z-index: 100; }
         .header-inner { display: flex; justify-content: space-between; align-items: center; height: 75px; }
-        .logo { font-size: 24px; font-weight: 900; color: var(--primary-color); letter-spacing: 0.05em; }
-        .header-btn { background-color: var(--accent-color); color: var(--white); padding: 12px 24px; border-radius: 30px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2); }
-        .header-btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); }
+        .logo { font-size: 24px; font-weight: 900; color: var(--primary-color); letter-spacing: 0.05em; flex-shrink: 0;}
+        
+        /* PC用ヘッダーメニュー */
+        .header-nav { display: none; }
+        @media (min-width: 992px) {
+            .header-nav { display: flex; gap: 25px; align-items: center; margin-left: auto; margin-right: 30px; }
+            .nav-link { font-weight: 700; color: var(--primary-color); font-size: 15px; position: relative; padding: 5px 0;}
+            .nav-link:hover { color: var(--accent-color); }
+            .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-color); transition: 0.3s; }
+            .nav-link:hover::after { width: 100%; }
+        }
+
+        .header-btn { background-color: var(--accent-color); color: var(--white); padding: 12px 24px; border-radius: 30px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2); white-space: nowrap;}
+        .header-btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); color: var(--white); }
 
         /* FV */
         .hero { background: linear-gradient(135deg, #f0fff0 0%, var(--bg-light) 100%); padding: 70px 0 90px; overflow: hidden; }
@@ -103,7 +112,7 @@
         .hero h1 .large { font-size: 48px; color: #d32f2f; display: inline-block; }
         .hero-sub { font-size: 16px; font-weight: 700; color: var(--text-light); margin-bottom: 15px; }
 
-        /* 共感・特徴・お客様の声 */
+        /* 共感・特徴 */
         .problem-box { background: var(--white); border: 3px solid #ffcccc; border-radius: 20px; padding: 45px; max-width: 800px; margin: 0 auto; box-shadow: 0 15px 35px rgba(255,0,0,0.06); }
         .problem-box ul { list-style: none; padding: 0; margin: 0; }
         .problem-box li { font-size: 18px; margin-bottom: 20px; padding-left: 45px; position: relative; font-weight: 700; }
@@ -131,53 +140,52 @@
         .voice-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
         @media (min-width: 768px) { .voice-grid { grid-template-columns: repeat(3, 1fr); } }
         
-        .voice-card { 
-            background: var(--white); border-radius: 16px; border-top: 5px solid var(--accent-color); 
-            box-shadow: 0 10px 30px rgba(0,115,54,0.08); overflow: hidden; position: relative;
-            display: flex; flex-direction: column; transition: transform 0.3s;
-        }
+        .voice-card { background: var(--white); border-radius: 16px; border-top: 5px solid var(--accent-color); box-shadow: 0 10px 30px rgba(0,115,54,0.08); overflow: hidden; position: relative; display: flex; flex-direction: column; transition: transform 0.3s; }
         .voice-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,115,54,0.12); }
-        
         .voice-img { width: 100%; height: 200px; background-color: var(--secondary-color); overflow: hidden; }
         .voice-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
         .voice-card:hover .voice-img img { transform: scale(1.05); }
-
         .voice-content { padding: 30px 25px; position: relative; flex: 1; }
-        .voice-content::before { 
-            content: '\f10e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); 
-            font-size: 50px; position: absolute; top: 15px; right: 20px; opacity: 0.6; z-index: 0;
-        }
+        .voice-content::before { content: '\f10e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); font-size: 50px; position: absolute; top: 15px; right: 20px; opacity: 0.6; z-index: 0; }
         .voice-name { font-weight: 900; color: var(--primary-color); margin-bottom: 15px; font-size: 16px; line-height: 1.6; position: relative; z-index: 1; }
         .voice-text { font-size: 15px; line-height: 1.8; color: var(--text-light); position: relative; z-index: 1; }
 
         /* =========================================
-           ✨ 新機能2：アコーディオン式 FAQ
+           ✨ 代表者紹介セクション（新規追加）
         ========================================= */
+        .profile-card {
+            display: flex; flex-direction: column; background: var(--white);
+            border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,115,54,0.08);
+            gap: 40px; margin: 0 auto; max-width: 950px; border: 2px solid var(--secondary-color);
+        }
+        @media (min-width: 768px) {
+            .profile-card { flex-direction: row; align-items: center; padding: 50px; gap: 50px; }
+        }
+        .profile-img-wrap { flex-shrink: 0; text-align: center; margin: 0 auto; }
+        .profile-img-wrap img {
+            width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,115,54,0.15); border: 5px solid var(--secondary-color);
+            background-color: var(--white);
+        }
+        @media (min-width: 768px) { .profile-img-wrap img { width: 220px; height: 220px; } }
+        
+        .profile-content { flex: 1; text-align: left; }
+        .profile-title { color: var(--primary-color); font-size: 22px; font-weight: 900; margin-top: 0; margin-bottom: 20px; line-height: 1.6; }
+        .profile-message { font-size: 16px; line-height: 1.8; color: var(--text-main); margin-bottom: 0;}
+        .profile-name { font-size: 16px; font-weight: 700; color: var(--text-main); text-align: right; margin-top: 25px; border-top: 2px dashed var(--secondary-color); padding-top: 20px; }
+        .profile-name span { font-size: 24px; color: var(--primary-color); margin-left: 15px; font-weight: 900;}
+
+        /* アコーディオン式 FAQ */
         .faq-list { max-width: 800px; margin: 0 auto; }
-        details.faq-item {
-            background: var(--white); border-radius: 12px; margin-bottom: 20px; 
-            box-shadow: 0 5px 20px rgba(0,115,54,0.06); overflow: hidden; transition: 0.3s;
-        }
+        details.faq-item { background: var(--white); border-radius: 12px; margin-bottom: 20px; box-shadow: 0 5px 20px rgba(0,115,54,0.06); overflow: hidden; transition: 0.3s; }
         details.faq-item:hover { box-shadow: 0 8px 30px rgba(0,115,54,0.1); }
-        
-        summary.faq-q { 
-            font-weight: 900; font-size: 18px; color: var(--primary-color); 
-            padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; 
-            cursor: pointer; list-style: none; margin: 0;
-        }
-        summary.faq-q::-webkit-details-marker { display: none; } /* Safari用のデフォルト矢印消し */
-        
+        summary.faq-q { font-weight: 900; font-size: 18px; color: var(--primary-color); padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; list-style: none; margin: 0; }
+        summary.faq-q::-webkit-details-marker { display: none; }
         .faq-q-text { display: flex; gap: 15px; align-items: flex-start; flex: 1; }
         .faq-q-text i { color: var(--accent-color); font-size: 24px; margin-top: 2px; flex-shrink: 0;}
-        
         .faq-icon { font-size: 20px; color: var(--primary-color); transition: transform 0.3s; flex-shrink: 0; margin-left: 15px;}
-        details.faq-item[open] .faq-icon { transform: rotate(45deg); } /* 開いた時に✕になる */
-        
-        .faq-a { 
-            font-size: 16px; color: var(--text-light); display: flex; gap: 15px; 
-            line-height: 1.8; align-items: flex-start; padding: 0 30px 30px; 
-            border-top: 1px dashed #eee; margin-top: -5px; padding-top: 25px;
-        }
+        details.faq-item[open] .faq-icon { transform: rotate(45deg); }
+        .faq-a { font-size: 16px; color: var(--text-light); display: flex; gap: 15px; line-height: 1.8; align-items: flex-start; padding: 0 30px 30px; border-top: 1px dashed #eee; margin-top: -5px; padding-top: 25px; }
         .faq-a i { color: #8fcd8f; font-size: 24px; margin-top: 2px; flex-shrink: 0;}
 
         /* フロー・クロージング */
@@ -194,7 +202,7 @@
         .closing p { font-size: 18px; margin-bottom: 40px; font-weight: 700; line-height: 1.8; opacity: 0.9; }
 
         /* =========================================
-           ✨ 新機能3：追従型フローティングCTA & TOPへ戻る
+           ✨ TOPへ戻る ＆ 追従型お問い合わせボタン
         ========================================= */
         .floating-action {
             position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; align-items: flex-end; z-index: 999;
@@ -208,11 +216,15 @@
         }
         .fab-contact:hover { transform: scale(1.05); color: #fff; background: linear-gradient(135deg, #ffaa4d 0%, #ff9d22 100%); }
         
+        /* 💡 TOPボタンのデザイン */
         .fab-top {
-            width: 50px; height: 50px; background-color: var(--primary-color); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px;
-            box-shadow: 0 5px 15px rgba(0,115,54,0.3); cursor: pointer; transition: 0.3s; border: none;
+            width: 55px; height: 55px; background-color: var(--primary-color); color: #fff; border-radius: 50%; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            font-size: 12px; font-weight: 900; box-shadow: 0 5px 15px rgba(0,115,54,0.4); 
+            cursor: pointer; transition: 0.3s; border: none; line-height: 1.2; text-decoration: none;
         }
-        .fab-top:hover { background-color: #005a2a; transform: translateY(-3px); }
+        .fab-top i { font-size: 18px; margin-bottom: 2px;}
+        .fab-top:hover { background-color: #005a2a; transform: translateY(-3px); color: #fff;}
 
         /* フッター */
         footer { background-color: #1a241e; color: #cccccc; text-align: center; padding: 50px 0 80px; font-size: 14px; }
@@ -220,14 +232,18 @@
         footer a:hover { color: var(--secondary-color); text-decoration: underline; }
         .copyright { margin-top: 25px; font-size: 12px; color: #777777; letter-spacing: 0.05em; }
 
+        /* スマホ対応 */
         @media (max-width: 768px) {
             .hero h1 { font-size: 26px; } .hero h1 .large { font-size: 38px; }
             .section-title { font-size: 26px; margin-bottom: 40px; }
             .btn { font-size: 15px; padding: 16px 20px; width: 100%; }
+            header .header-nav { display: none; } /* スマホ時はナビゲーション非表示 */
             header .header-btn { display: none; }
             .flow-step { padding: 20px; flex-direction: column; text-align: center; gap: 15px; }
             .step-num { margin-right: 0; }
             details.faq-item summary { padding: 20px; font-size: 16px; }
+            
+            .profile-card { padding: 30px 20px; }
             
             /* スマホ時の追従ボタンを画面下部に固定バーとして表示 */
             .floating-action { bottom: 0; right: 0; width: 100%; flex-direction: row; align-items: stretch; gap: 0; transform: translateY(100%); }
@@ -235,23 +251,32 @@
             .fab-contact { border-radius: 0; flex: 1; justify-content: center; padding: 18px 0; font-size: 15px; box-shadow: none; }
             
             /* トップに戻るボタンの位置調整 */
-            .fab-top { position: fixed; bottom: 80px; right: 20px; width: 45px; height: 45px; font-size: 18px; z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s; transform: translateY(20px);}
-            .fab-top.show { opacity: 1; visibility: visible; transform: translateY(0);}
+            .fab-top { position: absolute; bottom: 75px; right: 15px; width: 50px; height: 50px; font-size: 18px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
+            .fab-top span { display: none; }
+            .fab-top i { margin-bottom: 0;}
             
             body { padding-bottom: 60px; } /* 固定バーの分だけ下部余白を空ける */
         }
     </style>
 </head>
-<body>
+<body id="top">
 
     <header>
         <div class="container header-inner">
-            <div class="logo">AIセラピスト co-mii</div>
+            <a href="#top" class="logo">AIセラピスト co-mii</a>
+            
+            <nav class="header-nav">
+                <a href="#features" class="nav-link">選ばれる理由</a>
+                <a href="#voice" class="nav-link">導入事例</a>
+                <a href="#profile" class="nav-link">代表者紹介</a>
+                <a href="#faq" class="nav-link">よくある質問</a>
+            </nav>
+
             <a href="form.html" target="_blank" rel="noopener noreferrer" class="header-btn">資料ダウンロード / お問い合わせ</a>
         </div>
     </header>
 
-    <section class="hero" id="top">
+    <section class="hero">
         <div class="container flex-container">
             <div class="flex-content fade-in">
                 <div class="badges">
@@ -329,7 +354,7 @@
         </div>
     </section>
 
-    <section>
+    <section id="features">
         <div class="container">
             <h2 class="section-title fade-in">co-miiが選ばれる4つの理由</h2>
 
@@ -340,7 +365,7 @@
                     <p>認知、感覚、社会性など7つの分野ごとに「はい or いいえ」で回答するだけの簡単な診断テストを実施。AIが子ども一人ひとりの特性を分析し、レーダーチャートで視覚的にわかりやすく結果を提示します。専門知識がなくても、属人化しない精度の高いアセスメントが可能です。</p>
                 </div>
                 <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600" alt="発達特性アセスメントのイメージ">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600" alt="発達特性アセスメントのイメージ" loading="lazy">
                 </div>
             </div>
 
@@ -351,7 +376,7 @@
                     <p>アセスメント結果に応じて、5領域（健康・生活、運動・感覚、認知・行動、言語・コミュニケーション、人間関係・社会性）ごとの支援目標をAIが自動設定し、個別支援計画書に反映します。これまで児童1人あたり約4時間かかっていた作成業務を大幅にショートカット。次回の更新時に便利なモニタリング機能も搭載しています。</p>
                 </div>
                 <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=600" alt="個別支援計画書作成のイメージ">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=600" alt="個別支援計画書作成のイメージ" loading="lazy">
                 </div>
             </div>
 
@@ -362,7 +387,7 @@
                     <p>「今日は何をしよう…」と悩む必要はありません。アセスメント結果に基づき、500種類以上の豊富な療育メニューの中から「今、優先して取り組むべきトレーニング」をAIが提案。スタッフ向けの指導マニュアルも充実しており、誰でも質の高い療育を日々実践できます。保護者への報告に使える日報機能も搭載。</p>
                 </div>
                 <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=600" alt="日々の療育メニューのイメージ">
+                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=600" alt="日々の療育メニューのイメージ" loading="lazy">
                 </div>
             </div>
 
@@ -373,13 +398,13 @@
                     <p>加算の取得に必要な「専門的支援実施計画書」も、アセスメント結果から半自動で作成できます。5年以上の実務経験を持つ「保育士」や「児童指導員」でも、co-miiを活用することで要件を満たしやすく、事業所の収益アップ（専門的支援体制加算と合わせて546単位/月・1人 ※条件あり）に大きく貢献します。</p>
                 </div>
                 <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600" alt="専門的支援実施加算のイメージ">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600" alt="専門的支援実施加算のイメージ" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-light">
+    <section id="voice" class="bg-light">
         <div class="container fade-in">
             <h2 class="section-title">全国の事業所で、<br>業務改善と支援の質向上が起きています！</h2>
             
@@ -411,13 +436,35 @@
         </div>
     </section>
 
-    <section>
-        <div class="container fade-in">
+    <section id="profile" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">代表者紹介</h2>
+            
+            <div class="profile-card">
+                <div class="profile-img-wrap">
+                    <img src="co-miiface.png" alt="代表者 顔写真" onerror="this.onerror=null; this.src='co-miiface.jpg';" loading="lazy">
+                </div>
+                <div class="profile-content">
+                    <h3 class="profile-title">子どもたちと現場スタッフが、共に笑顔になれる環境を創りたい</h3>
+                    <p class="profile-message">
+                        児童発達支援や放課後等デイサービスの現場では、子どもたち一人ひとりに寄り添った質の高い療育が求められる一方で、書類作成などの事務作業に多くの時間が割かれているのが現状です。<br><br>
+                        私たちは「本当に大切な、子どもたちと向き合う時間を増やしたい」という強い想いから、この『AIセラピスト co-mii』を開発いたしました。<br>
+                        現場の皆様の負担を減らし、療育の質と事業所の収益向上を同時に実現するパートナーとして、明るい未来を共に創ってまいります。
+                    </p>
+                    <div class="profile-name">株式会社サミットラン<br>代表取締役 <span>古見居　太郎</span></div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="bg-light fade-in" id="faq">
+        <div class="container">
             <h2 class="section-title">導入に関するよくあるご質問</h2>
             <div class="faq-list">
                 
                 <details class="faq-item" open>
-                    <summary>
+                    <summary class="faq-q">
                         <div class="faq-q-text"><i class="fa-solid fa-circle-question"></i> <div>パソコン操作が苦手なスタッフが多いのですが、使いこなせますか？</div></div>
                         <i class="fa-solid fa-plus faq-icon"></i>
                     </summary>
@@ -425,7 +472,7 @@
                 </details>
 
                 <details class="faq-item">
-                    <summary>
+                    <summary class="faq-q">
                         <div class="faq-q-text"><i class="fa-solid fa-circle-question"></i> <div>AIの診断や計画書に根拠はあるのですか？</div></div>
                         <i class="fa-solid fa-plus faq-icon"></i>
                     </summary>
@@ -433,7 +480,7 @@
                 </details>
 
                 <details class="faq-item">
-                    <summary>
+                    <summary class="faq-q">
                         <div class="faq-q-text"><i class="fa-solid fa-circle-question"></i> <div>独自の療育内容も計画書に記載できますか？</div></div>
                         <i class="fa-solid fa-plus faq-icon"></i>
                     </summary>
@@ -444,7 +491,7 @@
         </div>
     </section>
 
-    <section class="bg-light fade-in">
+    <section class="fade-in">
         <div class="container">
             <h2 class="section-title">ご利用までの流れ</h2>
             <div class="flow-container">
@@ -488,7 +535,7 @@
             </div>
 
             <div class="flex-image delay-200">
-                <img src="co-miichan3.png" alt="お問い合わせをお待ちしております" class="floating-img delay-3">
+                <img src="co-miichan3.png" alt="お問い合わせをお待ちしております" class="floating-img delay-3" loading="lazy">
             </div>
         </div>
     </section>
@@ -506,7 +553,10 @@
     </footer>
 
     <div class="floating-action" id="floatingAction">
-        <button class="fab-top" id="scrollTopBtn" title="トップへ戻る"><i class="fa-solid fa-arrow-up"></i></button>
+        <a href="#top" class="fab-top" title="トップへ戻る">
+            <i class="fa-solid fa-chevron-up"></i>
+            <span>TOP</span>
+        </a>
         <a href="form.html" target="_blank" rel="noopener noreferrer" class="fab-contact">
             <i class="fa-regular fa-envelope"></i> 資料請求・お問い合わせ
         </a>
@@ -514,7 +564,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. スクロールフェードイン
+            // スクロールフェードイン
             const faders = document.querySelectorAll('.fade-in');
             const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
             const appearOnScroll = new IntersectionObserver(function(entries, observer) {
@@ -527,23 +577,15 @@
 
             faders.forEach(fader => { appearOnScroll.observe(fader); });
 
-            // 2. トップへ戻る & 追従ボタンの表示制御
+            // 追従ボタンの表示制御
             const floatingAction = document.getElementById('floatingAction');
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
             
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 400) {
-                    floatingAction.classList.add('show');
-                    scrollTopBtn.classList.add('show');
+                    if(floatingAction) floatingAction.classList.add('show');
                 } else {
-                    floatingAction.classList.remove('show');
-                    scrollTopBtn.classList.remove('show');
+                    if(floatingAction) floatingAction.classList.remove('show');
                 }
-            });
-
-            // 3. トップへ戻る処理
-            scrollTopBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     </script>
