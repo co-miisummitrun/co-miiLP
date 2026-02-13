@@ -49,7 +49,7 @@
         .btn-reset { background-color: #f1f1f1; color: #333; border: 1px solid #ccc; padding: 8px 16px; font-size: 14px; border-radius: 3px; cursor: pointer; transition: 0.2s; }
         .btn-reset:hover { background-color: #e2e2e2; }
 
-        /* ② 送信完了ポップアップ（モーダル）のデザイン */
+        /* 送信完了ポップアップ（モーダル）のデザイン */
         .popup-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center;
@@ -81,7 +81,7 @@
         <div class="form-container">
             <h2 class="form-title">AIセラピスト co-mii お問い合わせフォーム</h2>
             
-            <form id="contactForm" action="https://ssgform.com/s/THAz3NmzXbPU" method="POST">
+            <form id="contactForm" action="https://ssgform.com/s/THAz3NmzXbPU" method="POST" target="hidden_iframe">
                 
                 <div class="form-group">
                     <label>会社<span class="req">*</span></label>
@@ -171,7 +171,7 @@
 
                         <div class="form-buttons">
                             <button type="submit" class="btn-submit" id="submitBtn">送信する</button>
-                            <button type="reset" class="btn-reset" onclick="grecaptcha.reset();">リセットする</button>
+                            <button type="button" class="btn-reset" onclick="document.getElementById('contactForm').reset(); try{grecaptcha.reset();}catch(e){}">リセットする</button>
                         </div>
                         
                     </div>
@@ -180,6 +180,8 @@
             </form>
         </div>
     </section>
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
     <div class="popup-overlay" id="successPopup">
         <div class="popup-content" id="popupContent">
@@ -193,55 +195,42 @@
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const popup = document.getElementById('successPopup');
+        let isSubmitting = false;
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // 通常の画面遷移をストップ
-            
             // reCAPTCHAのチェック確認
             const recaptchaResponse = document.querySelector('.g-recaptcha-response').value;
             if (recaptchaResponse === "") {
+                e.preventDefault(); // 送信をストップ
                 alert("セキュリティチェックのため、「私はロボットではありません」にチェックを入れてください。");
                 return;
             }
 
             // 送信ボタンを「送信中...」に変更して二重送信を防止
             submitBtn.textContent = '送信中...';
-            submitBtn.disabled = true;
+            // JavaScriptの実行タイミングのズレで送信自体が止まるのを防ぐため、少し遅らせて無効化
+            setTimeout(() => { submitBtn.disabled = true; }, 10);
+            
+            isSubmitting = true;
+        });
 
-            const formData = new FormData(form);
-            const actionUrl = form.getAttribute('action');
-
-            // 外部のフォームサービス（FormspreeやSSGform等）へ非同期で送信
-            fetch(actionUrl, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            })
-            .then(response => {
-                // 成功したか、もしくはまだ設定前のダミーURL（★マーク入り）の場合は成功画面を出す
-                if (response.ok || actionUrl.includes('★')) {
-                    popup.style.display = 'flex';
-                    form.reset();
+        // iframeの読み込み完了時（＝SSGformへの送信完了時）にポップアップを表示
+        document.getElementById('hidden_iframe').addEventListener('load', function() {
+            if (isSubmitting) {
+                // ポップアップを表示
+                popup.style.display = 'flex';
+                
+                // フォームをリセット
+                form.reset();
+                if (typeof grecaptcha !== 'undefined') {
                     grecaptcha.reset(); // reCAPTCHAのチェックを外す
-                } else {
-                    alert("送信に失敗しました。フォームのURL設定等を確認してください。");
                 }
-            })
-            .catch(error => {
-                // まだ設定前のダミーURL（★マーク入り）の場合は成功画面を出す
-                if (actionUrl.includes('★')) {
-                    popup.style.display = 'flex';
-                    form.reset();
-                    grecaptcha.reset(); 
-                } else {
-                    alert("通信エラーが発生しました。通信環境の良い場所で再度お試しください。");
-                }
-            })
-            .finally(function() {
+                
                 // ボタンを元に戻す
                 submitBtn.textContent = '送信する';
                 submitBtn.disabled = false;
-            });
+                isSubmitting = false;
+            }
         });
 
         // ポップアップを閉じてタブごと閉じる関数
