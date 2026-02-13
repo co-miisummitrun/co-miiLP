@@ -13,9 +13,7 @@
         /* =========================================
            基本設定・カラーパレット・スクロール
         ========================================= */
-        html {
-            scroll-behavior: smooth; /* ページ内リンクでなめらかにスクロール */
-        }
+        html { scroll-behavior: smooth; }
         
         :root {
             --primary-color: #0056b3;     /* 信頼のブルー */
@@ -40,52 +38,22 @@
         img { max-width: 100%; height: auto; }
         a { text-decoration: none; }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         section { padding: 80px 0; }
         .bg-light { background-color: var(--bg-light); }
 
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 900;
-            margin-bottom: 50px;
-            color: var(--primary-color);
-            line-height: 1.4;
-        }
+        .section-title { text-align: center; font-size: 32px; font-weight: 900; margin-bottom: 50px; color: var(--primary-color); line-height: 1.4; }
         .section-title.left { text-align: center; }
-        @media (min-width: 768px) {
-            .section-title.left { text-align: left; }
-        }
+        @media (min-width: 768px) { .section-title.left { text-align: left; } }
 
-        .highlight {
-            background: linear-gradient(transparent 60%, #fff59d 60%);
-            font-weight: 900;
-        }
+        .highlight { background: linear-gradient(transparent 60%, #fff59d 60%); font-weight: 900; }
 
         /* =========================================
-           共通2カラムレイアウト（画像とテキスト）
+           共通2カラムレイアウト
         ========================================= */
-        .flex-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-        }
-        .flex-content {
-            flex: 1;
-            text-align: center;
-        }
-        .flex-image {
-            width: 100%;
-            max-width: 350px;
-            flex-shrink: 0;
-            text-align: center;
-        }
+        .flex-container { display: flex; flex-direction: column; align-items: center; gap: 40px; }
+        .flex-content { flex: 1; text-align: center; }
+        .flex-image { width: 100%; max-width: 350px; flex-shrink: 0; text-align: center; }
         @media (min-width: 768px) {
             .flex-container { flex-direction: row; justify-content: space-between; }
             .flex-container.reverse { flex-direction: row-reverse; }
@@ -93,7 +61,7 @@
         }
 
         /* =========================================
-           👑 画像を左右・上下にフワフワ動かすアニメーション
+           👑 キャラクター画像のアニメーション
         ========================================= */
         @keyframes floating {
             0%   { transform: translate(-15px, 0px) rotate(-2deg); }
@@ -102,9 +70,7 @@
         }
 
         .floating-img {
-            width: 100%;
-            display: block;
-            margin: 0 auto;
+            width: 100%; display: block; margin: 0 auto;
             filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
             animation: floating 5s ease-in-out infinite;
         }
@@ -117,102 +83,39 @@
            YouTube動画セクション
         ========================================= */
         .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9アスペクト比 */
-            height: 0;
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 16px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            background-color: #000;
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            max-width: 800px; margin: 0 auto; border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15); background-color: #000;
         }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
         /* =========================================
            ボタン（CTA）
         ========================================= */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--accent-color);
-            color: var(--white);
-            font-size: 16px;
-            font-weight: 700;
-            padding: 16px 24px;
-            border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(255, 122, 0, 0.3);
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 450px;
-            gap: 10px;
+            display: inline-flex; align-items: center; justify-content: center; background-color: var(--accent-color);
+            color: var(--white); font-size: 16px; font-weight: 700; padding: 16px 24px; border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(255, 122, 0, 0.3); transition: all 0.3s ease; width: 100%; max-width: 450px; gap: 10px;
         }
-        .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 122, 0, 0.4);
-        }
-        .btn-outline {
-            background-color: var(--white);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            box-shadow: none;
-        }
+        .btn:hover { background-color: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(255, 122, 0, 0.4); }
+        .btn-outline { background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); box-shadow: none; }
         .btn-outline:hover { background-color: var(--secondary-color); }
-        .btn-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-            margin-top: 30px;
-        }
-        @media (min-width: 768px) {
-            .btn-wrap { flex-direction: row; justify-content: flex-start; }
-        }
+        .btn-wrap { display: flex; flex-direction: column; gap: 15px; align-items: center; margin-top: 30px; }
+        @media (min-width: 768px) { .btn-wrap { flex-direction: row; justify-content: flex-start; } }
 
         /* =========================================
            ヘッダー
         ========================================= */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
+        header { background-color: var(--white); box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 70px; }
         .logo { font-size: 22px; font-weight: 900; color: var(--primary-color); }
-        .header-btn {
-            background-color: var(--accent-color);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+        .header-btn { background-color: var(--accent-color); color: var(--white); padding: 10px 20px; border-radius: 30px; font-weight: 700; font-size: 14px; transition: 0.3s; }
         .header-btn:hover { background-color: var(--accent-hover); }
 
         /* =========================================
            ファーストビュー（FV）
         ========================================= */
-        .hero {
-            background: linear-gradient(135deg, #e6f0fa 0%, #ffffff 100%);
-            padding: 60px 0 80px;
-            overflow: hidden;
-        }
+        .hero { background: linear-gradient(135deg, #e6f0fa 0%, #ffffff 100%); padding: 60px 0 80px; overflow: hidden; }
         .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
         @media (min-width: 768px) { .badges { justify-content: flex-start; } }
         .badge { background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); padding: 6px 14px; border-radius: 30px; font-weight: 700; font-size: 13px; }
@@ -235,30 +138,14 @@
         /* =========================================
            4つの理由（特徴）※ 画像対応
         ========================================= */
-        .feature-card {
-            display: flex; flex-direction: column; gap: 30px; margin-bottom: 60px;
-            background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
+        .feature-card { display: flex; flex-direction: column; gap: 30px; margin-bottom: 60px; background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         @media (min-width: 768px) {
-            .feature-card { flex-direction: row; align-items: stretch; } /* 高さを揃える */
+            .feature-card { flex-direction: row; align-items: stretch; } 
             .feature-card:nth-child(even) { flex-direction: row-reverse; }
         }
         .feature-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        
-        /* 挿入する画像のスタイル */
-        .feature-img {
-            flex: 1;
-            border-radius: 12px;
-            overflow: hidden; /* 角丸からはみ出ないように設定 */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            min-height: 250px;
-        }
-        .feature-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 枠いっぱいに綺麗に表示 */
-            display: block;
-        }
+        .feature-img { flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); min-height: 250px; background-color: var(--secondary-color);}
+        .feature-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .feature-num { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 16px; border-radius: 20px; font-weight: 900; font-size: 14px; margin-bottom: 15px; width: fit-content; }
         .feature-card h3 { font-size: 22px; font-weight: 900; color: var(--primary-color); margin-bottom: 20px; line-height: 1.5; }
@@ -296,159 +183,6 @@
         .closing p { font-size: 18px; margin-bottom: 30px; font-weight: 700; line-height: 1.8; }
 
         /* =========================================
-           📝 お問い合わせ・資料請求フォーム（追加部分）
-        ========================================= */
-        .form-section {
-            background-color: #f6f8e8; /* 画像に近い淡いグリーン背景 */
-            padding: 60px 0 80px;
-        }
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .form-title {
-            font-size: 18px;
-            font-weight: 900;
-            margin-bottom: 35px;
-            color: #000;
-        }
-        .form-group {
-            display: flex;
-            margin-bottom: 15px;
-            align-items: center;
-        }
-        .form-group > label {
-            width: 250px;
-            font-size: 14px;
-            color: #000;
-            flex-shrink: 0;
-        }
-        .form-group .req {
-            color: #e00; /* 必須の赤色マーク */
-            margin-left: 2px;
-        }
-        .form-input-box {
-            flex: 1;
-            display: flex;
-            align-items: center;
-        }
-        .form-input-box input[type="text"],
-        .form-input-box input[type="email"],
-        .form-input-box input[type="tel"],
-        .form-input-box select,
-        .form-input-box textarea {
-            width: 100%;
-            max-width: 400px;
-            padding: 6px 10px;
-            border: 1px solid #ccc;
-            border-radius: 2px;
-            font-size: 14px;
-            background-color: #fff;
-        }
-        .form-input-box textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        /* 備考欄・チェックボックスを上揃えにする用 */
-        .form-group.align-top {
-            align-items: flex-start;
-        }
-        .form-group.align-top > label {
-            margin-top: 6px;
-        }
-
-        /* プライバシーポリシーチェック */
-        .privacy-check {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-        .privacy-check input {
-            margin-right: 5px;
-            cursor: pointer;
-            width: 15px;
-            height: 15px;
-        }
-        .privacy-check label {
-            font-size: 14px;
-            color: #000;
-            cursor: pointer;
-        }
-        .privacy-check a {
-            color: blue;
-            text-decoration: underline;
-        }
-
-        /* reCAPTCHAのダミーデザイン */
-        .recaptcha-dummy {
-            width: 100%;
-            max-width: 302px;
-            height: 76px;
-            background: #f9f9f9;
-            border: 1px solid #d3d3d3;
-            border-radius: 3px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 12px;
-            box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-        .rc-left { display: flex; align-items: center; gap: 10px; }
-        .rc-left input[type="checkbox"] {
-            width: 28px; height: 28px;
-            cursor: pointer;
-        }
-        .rc-text { font-size: 14px; color: #222; }
-        .rc-right { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .rc-right img { width: 32px; }
-        .rc-links { font-size: 10px; color: #555; margin-top: 2px; text-align: center; line-height: 1.2; }
-
-        /* 送信・リセットボタン */
-        .form-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .btn-submit {
-            background-color: #0088ff;
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-submit:hover { background-color: #0066cc; }
-        .btn-reset {
-            background-color: #f1f1f1;
-            color: #333;
-            border: 1px solid #ccc;
-            padding: 8px 16px;
-            font-size: 14px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-reset:hover { background-color: #e2e2e2; }
-
-        /* スマホ用フォーム微調整 */
-        @media (max-width: 768px) {
-            .form-group { flex-direction: column; align-items: flex-start; }
-            .form-group > label { width: 100%; margin-bottom: 5px; }
-            .form-input-box { width: 100%; }
-            .form-input-box input[type="text"],
-            .form-input-box input[type="email"],
-            .form-input-box input[type="tel"],
-            .form-input-box select,
-            .form-input-box textarea { max-width: 100%; }
-            .desktop-only { display: none; }
-        }
-
-        /* =========================================
            フッター
         ========================================= */
         footer { background-color: #222222; color: #dddddd; text-align: center; padding: 40px 0; font-size: 14px; }
@@ -474,7 +208,7 @@
     <header>
         <div class="container header-inner">
             <div class="logo">AIセラピスト co-mii</div>
-            <a href="#contact-form" class="header-btn">資料ダウンロード / お問い合わせ</a>
+            <a href="form.html" target="_blank" rel="noopener noreferrer" class="header-btn">資料ダウンロード / お問い合わせ</a>
         </div>
     </header>
 
@@ -497,8 +231,8 @@
                 <p style="font-weight: normal; margin-bottom: 30px;">属人化しがちなアセスメントから計画書作成、日々の療育メニューの提案まで、AIがワンストップでサポートします。</p>
 
                 <div class="btn-wrap">
-                    <a href="#contact-form" class="btn"><i class="fa-solid fa-file-pdf"></i> 無料資料ダウンロード 〉</a>
-                    <a href="#contact-form" class="btn btn-outline"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
+                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn"><i class="fa-solid fa-file-pdf"></i> 無料資料ダウンロード 〉</a>
+                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
                 </div>
             </div>
 
@@ -589,7 +323,7 @@
                     <p>「今日は何をしよう…」と悩む必要はありません。アセスメント結果に基づき、500種類以上の豊富な療育メニューの中から「今、優先して取り組むべきトレーニング」をAIが提案。スタッフ向けの指導マニュアルも充実しており、誰でも質の高い療育を日々実践できます。保護者への報告に使える日報機能も搭載。</p>
                 </div>
                 <div class="feature-img">
-                    <img src="https://images.unsplash.com/photo-1566024287541-55b1613587b1?auto=format&fit=crop&q=80&w=600" alt="日々の療育メニューのイメージ">
+                    <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=600" alt="日々の療育メニューのイメージ">
                 </div>
             </div>
 
@@ -652,7 +386,7 @@
             <div class="flow-container">
                 <div class="flow-step">
                     <div class="step-num">1</div>
-                    <div><div class="step-text">お問い合わせ・資料請求</div><div class="step-desc">まずは下部のフォームよりお気軽にご連絡ください</div></div>
+                    <div><div class="step-text">お問い合わせ・資料請求</div><div class="step-desc">まずはフォームよりお気軽にご連絡ください</div></div>
                 </div>
                 <div class="flow-step">
                     <div class="step-num">2</div>
@@ -683,8 +417,8 @@
                     まずは詳しい料金プランや機能がわかる無料資料をご覧いただくか、実際の画面をお見せするオンライン説明会へお気軽にご参加ください！
                 </p>
                 <div class="btn-wrap">
-                    <a href="#contact-form" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 無料資料をダウンロード 〉</a>
-                    <a href="#contact-form" class="btn btn-outline" style="border-color: #fff; color: #fff;"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
+                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 無料資料をダウンロード 〉</a>
+                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="border-color: #fff; color: #fff;"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
                 </div>
             </div>
 
@@ -694,126 +428,13 @@
         </div>
     </section>
 
-
-    <section id="contact-form" class="form-section">
-        <div class="form-container">
-            <h2 class="form-title">AIセラピスト co-mii 資料請求フォーム</h2>
-            
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label>会社<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="text" name="company" required></div>
-                </div>
-                
-                <div class="form-group">
-                    <label>お名前<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="text" name="name" required></div>
-                </div>
-                
-                <div class="form-group">
-                    <label>電話番号<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="tel" name="tel" required></div>
-                </div>
-                
-                <div class="form-group">
-                    <label>メール<span class="req">*</span></label>
-                    <div class="form-input-box" style="gap: 8px;">
-                        <input type="email" name="email" required style="flex: 1; max-width: 370px;">
-                        <i class="fa-regular fa-circle-question" style="color: #bbb; font-size: 18px;"></i>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>連絡の取れやすい時間帯<span class="req">*</span></label>
-                    <div class="form-input-box">
-                        <select name="contact-time" required>
-                            <option value="">選択してください</option>
-                            <option value="いつでも">いつでも</option>
-                            <option value="午前中">午前中</option>
-                            <option value="午後">午後</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>ご住所<span class="req">*</span></label>
-                    <div class="form-input-box"><input type="text" name="address" required></div>
-                </div>
-                
-                <div class="form-group">
-                    <label>問い合わせ内容<span class="req">*</span></label>
-                    <div class="form-input-box">
-                        <select name="inquiry-type" required>
-                            <option value="">選択してください</option>
-                            <option value="資料請求">資料請求</option>
-                            <option value="オンライン説明会希望">オンライン説明会希望</option>
-                            <option value="その他">その他</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>問い合わせのきっかけ<span class="req">*</span></label>
-                    <div class="form-input-box">
-                        <select name="trigger" required>
-                            <option value="">選択してください</option>
-                            <option value="Web検索">Web検索</option>
-                            <option value="SNS">SNS</option>
-                            <option value="知人の紹介">知人の紹介</option>
-                            <option value="その他">その他</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label>その他のきっかけ</label>
-                    <div class="form-input-box"><input type="text" name="trigger-other"></div>
-                </div>
-                
-                <div class="form-group align-top">
-                    <label>備考欄</label>
-                    <div class="form-input-box"><textarea name="memo"></textarea></div>
-                </div>
-
-                <div class="form-group align-top">
-                    <label class="desktop-only"></label>
-                    <div class="form-input-box" style="flex-direction: column; align-items: flex-start;">
-                        
-                        <div class="privacy-check">
-                            <input type="checkbox" id="privacy-check" required>
-                            <label for="privacy-check"><a href="#">プライバシーポリシー</a>に同意する。</label>
-                        </div>
-
-                        <div class="recaptcha-dummy">
-                            <div class="rc-left">
-                                <input type="checkbox" required>
-                                <div class="rc-text">私はロボットではありません</div>
-                            </div>
-                            <div class="rc-right">
-                                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
-                                <div class="rc-links">reCAPTCHA<br>プライバシー - 利用規約</div>
-                            </div>
-                        </div>
-
-                        <div class="form-buttons">
-                            <button type="submit" class="btn-submit">送信する</button>
-                            <button type="reset" class="btn-reset">リセットする</button>
-                        </div>
-                        
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </section>
-
     <footer>
         <div class="container">
             <p style="margin-bottom: 15px; font-weight: bold; font-size: 16px;">運営会社：株式会社サミットラン</p>
             <div>
                 <a href="https://summitrun.co.jp/" target="_blank" rel="noopener noreferrer">会社概要</a> | 
                 <a href="#">プライバシーポリシー</a> | 
-                <a href="#contact-form">お問い合わせ</a>
+                <a href="form.html" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
             </div>
             <p class="copyright">&copy; Summit Run Co., Ltd. All Rights Reserved.</p>
         </div>
