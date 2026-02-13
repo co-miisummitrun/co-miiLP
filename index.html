@@ -152,15 +152,76 @@
         .feature-card p { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 0;}
 
         /* =========================================
-           導入施設様の声・FAQ・フロー
+           💡 導入施設様の声（画像追加＆デザイン変更）
         ========================================= */
-        .voice-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .voice-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
         @media (min-width: 768px) { .voice-grid { grid-template-columns: repeat(3, 1fr); } }
-        .voice-card { background: var(--white); padding: 30px; border-radius: 12px; border-top: 5px solid var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; }
-        .voice-card::before { content: '\f10e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--secondary-color); font-size: 40px; position: absolute; top: 20px; right: 20px; opacity: 0.5; }
-        .voice-name { font-weight: 900; color: var(--primary-color); margin-bottom: 15px; font-size: 16px; padding-right: 30px; }
-        .voice-text { font-size: 15px; line-height: 1.7; color: #444; }
+        
+        .voice-card { 
+            background: var(--white); 
+            border-radius: 12px; 
+            border-top: 5px solid var(--accent-color); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            overflow: hidden; /* 画像が角丸からはみ出ないように */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 施設のイメージ画像部分 */
+        .voice-img {
+            width: 100%;
+            height: 180px;
+            background-color: var(--secondary-color);
+        }
+        .voice-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
+        /* テキストエリア */
+        .voice-content {
+            padding: 30px 25px;
+            position: relative;
+            flex: 1;
+        }
+
+        /* 背景の薄いダブルクォーテーションマーク（”） */
+        .voice-content::before { 
+            content: '\f10e'; 
+            font-family: 'Font Awesome 6 Free'; 
+            font-weight: 900; 
+            color: var(--secondary-color); 
+            font-size: 50px; 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            opacity: 0.6; 
+            z-index: 0;
+        }
+
+        .voice-name { 
+            font-weight: 900; 
+            color: var(--primary-color); 
+            margin-bottom: 20px; 
+            font-size: 16px; 
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .voice-text { 
+            font-size: 15px; 
+            line-height: 1.8; 
+            color: #444; 
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================
+           FAQ・フロー
+        ========================================= */
         .faq-list { max-width: 800px; margin: 0 auto; }
         .faq-item { background: var(--white); border-radius: 8px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .faq-q { font-weight: 900; font-size: 18px; color: var(--primary-color); margin-bottom: 15px; display: flex; gap: 15px; }
@@ -230,7 +291,7 @@
 
                 <div class="btn-wrap">
                     <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn"><i class="fa-solid fa-file-pdf"></i> 無料資料ダウンロード 〉</a>
-                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #fff; color: var(--primary-color);"><i class="fa-solid fa-envelope"></i> お問い合わせ 〉</a>
+                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> お問い合わせ 〉</a>
                 </div>
             </div>
 
@@ -341,19 +402,39 @@
     <section class="bg-light">
         <div class="container">
             <h2 class="section-title">全国の事業所で、<br>業務改善と支援の質向上が起きています！</h2>
+            
             <div class="voice-grid">
+                
                 <div class="voice-card">
-                    <div class="voice-name">大分県 / 放課後等デイサービス 多機能型元気ハウス 様</div>
-                    <div class="voice-text">「『診断』から『個別支援計画書』を作成する過程に、5領域を網羅した緻密なアセスメントがあるため、スタッフのスキルアップにも繋がり大助かりです。時短ができたことで施設内の雰囲気も良くなり、重宝しています！」</div>
+                    <div class="voice-img">
+                        <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&q=80&w=600" alt="施設での活動">
+                    </div>
+                    <div class="voice-content">
+                        <div class="voice-name">大分県 / 放課後等デイサービス<br>多機能型元気ハウス 様</div>
+                        <div class="voice-text">「『診断』から『個別支援計画書』を作成する過程に、5領域を網羅した緻密なアセスメントがあるため、スタッフのスキルアップにも繋がり大助かりです。時短ができたことで施設内の雰囲気も良くなり、重宝しています！」</div>
+                    </div>
                 </div>
+
                 <div class="voice-card">
-                    <div class="voice-name">神奈川県 / 放課後等デイサービス ひかりのにわ 様</div>
-                    <div class="voice-text">「今まで児発管の個々の能力で差が出ていた計画書が、一定の水準で作れるようになりました。あいまいな評価に基づかず、根拠あるアセスメントを実施できるので、事業所としての支援レベルを維持しやすくなっています。」</div>
+                    <div class="voice-img">
+                        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&q=80&w=600" alt="笑顔の子ども">
+                    </div>
+                    <div class="voice-content">
+                        <div class="voice-name">神奈川県 / 放課後等デイサービス<br>ひかりのにわ 様</div>
+                        <div class="voice-text">「今まで児発管の個々の能力で差が出ていた計画書が、一定の水準で作れるようになりました。あいまいな評価に基づかず、根拠あるアセスメントを実施できるので、事業所としての支援レベルを維持しやすくなっています。」</div>
+                    </div>
                 </div>
+
                 <div class="voice-card">
-                    <div class="voice-name">東京都 / 放課後等デイサービス すとれいとぱぁそんず 様</div>
-                    <div class="voice-text">「『根拠のある療育』を提供するために導入しました。日報機能もあり、一人ひとりに合わせた適切な支援を自信を持って保護者様に説明できるようになり、大変ご好評をいただいています。」</div>
+                    <div class="voice-img">
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=600" alt="保護者とのコミュニケーション">
+                    </div>
+                    <div class="voice-content">
+                        <div class="voice-name">東京都 / 放課後等デイサービス<br>すとれいとぱぁそんず 様</div>
+                        <div class="voice-text">「『根拠のある療育』を提供するために導入しました。日報機能もあり、一人ひとりに合わせた適切な支援を自信を持って保護者様に説明できるようになり、大変ご好評をいただいています。」</div>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -418,7 +499,7 @@
                 <div class="btn-wrap">
                     <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 無料資料をダウンロード 〉</a>
                     
-                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #fff; color: var(--primary-color);"><i class="fa-regular fa-envelope"></i> お問い合わせ 〉</a>
+                    <a href="form.html" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #fff; color: var(--primary-color);"><i class="fa-solid fa-envelope"></i> お問い合わせ 〉</a>
                 </div>
             </div>
 
