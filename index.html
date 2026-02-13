@@ -11,8 +11,12 @@
     
     <style>
         /* =========================================
-           基本設定・カラーパレット
+           基本設定・カラーパレット・スクロール
         ========================================= */
+        html {
+            scroll-behavior: smooth; /* ページ内リンクでなめらかにスクロール */
+        }
+        
         :root {
             --primary-color: #0056b3;     /* 信頼のブルー */
             --secondary-color: #e6f0fa;   /* 薄いブルー（背景用） */
@@ -101,17 +105,13 @@
             width: 100%;
             display: block;
             margin: 0 auto;
-            /* 透過画像のキャラクターの輪郭に沿って自然な影をつける */
             filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
-            /* 5秒かけてフワフワ動くアニメーションを無限ループ */
             animation: floating 5s ease-in-out infinite;
         }
 
-        /* 複数ある画像が全く同じ動きをしないようにタイミングをズラす */
         .delay-1 { animation-delay: 0s; }
         .delay-2 { animation-delay: -1.5s; }
         .delay-3 { animation-delay: -3s; }
-
 
         /* =========================================
            YouTube動画セクション
@@ -211,25 +211,11 @@
         .hero {
             background: linear-gradient(135deg, #e6f0fa 0%, #ffffff 100%);
             padding: 60px 0 80px;
-            overflow: hidden; /* アニメーションではみ出ないように設定 */
+            overflow: hidden;
         }
-        .badges {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
+        .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
         @media (min-width: 768px) { .badges { justify-content: flex-start; } }
-        .badge {
-            background-color: var(--white);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 13px;
-        }
+        .badge { background-color: var(--white); color: var(--primary-color); border: 2px solid var(--primary-color); padding: 6px 14px; border-radius: 30px; font-weight: 700; font-size: 13px; }
         .badge i { color: #f1c40f; margin-right: 5px; }
         .hero h1 { font-size: 28px; font-weight: 900; line-height: 1.5; margin-bottom: 20px; color: #111; }
         .hero h1 .large { font-size: 44px; color: #d32f2f; display: inline-block; }
@@ -238,69 +224,45 @@
         /* =========================================
            共感・課題提起
         ========================================= */
-        .problem-box {
-            background: var(--white);
-            border: 3px solid #ffcccc;
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
+        .problem-box { background: var(--white); border: 3px solid #ffcccc; border-radius: 12px; padding: 40px; max-width: 800px; margin: 0 auto; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         .problem-box ul { list-style: none; padding: 0; margin: 0; }
-        .problem-box li {
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-left: 40px;
-            position: relative;
-            font-weight: 700;
-        }
+        .problem-box li { font-size: 18px; margin-bottom: 20px; padding-left: 40px; position: relative; font-weight: 700; }
         .problem-box li:last-child { margin-bottom: 0; }
-        .problem-box li::before {
-            content: '\f14a';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: #ff4d4d;
-            position: absolute;
-            left: 0;
-            top: 2px;
-            font-size: 24px;
-        }
+        .problem-box li::before { content: '\f14a'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #ff4d4d; position: absolute; left: 0; top: 2px; font-size: 24px; }
         .problem-text { text-align: center; font-size: 18px; font-weight: 700; margin-top: 40px; line-height: 1.8; }
         .problem-conclusion { text-align: center; font-size: 24px; font-weight: 900; color: var(--primary-color); margin-top: 20px; }
 
         /* =========================================
-           4つの理由（特徴）
+           4つの理由（特徴）※ 画像対応
         ========================================= */
         .feature-card {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-bottom: 60px;
-            background: var(--white);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column; gap: 30px; margin-bottom: 60px;
+            background: var(--white); border-radius: 16px; padding: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         @media (min-width: 768px) {
-            .feature-card { flex-direction: row; align-items: center; }
+            .feature-card { flex-direction: row; align-items: stretch; } /* 高さを揃える */
             .feature-card:nth-child(even) { flex-direction: row-reverse; }
         }
-        .feature-content { flex: 1; }
+        .feature-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        
+        /* 挿入する画像のスタイル */
         .feature-img {
             flex: 1;
-            background-color: var(--secondary-color);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden; /* 角丸からはみ出ないように設定 */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             min-height: 250px;
-            color: var(--primary-color);
-            font-size: 48px;
         }
-        .feature-num { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 16px; border-radius: 20px; font-weight: 900; font-size: 14px; margin-bottom: 15px; }
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 枠いっぱいに綺麗に表示 */
+            display: block;
+        }
+
+        .feature-num { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 16px; border-radius: 20px; font-weight: 900; font-size: 14px; margin-bottom: 15px; width: fit-content; }
         .feature-card h3 { font-size: 22px; font-weight: 900; color: var(--primary-color); margin-bottom: 20px; line-height: 1.5; }
-        .feature-card p { font-size: 16px; color: #555; line-height: 1.8; }
+        .feature-card p { font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 0;}
 
         /* =========================================
            導入施設様の声・FAQ・フロー
@@ -329,14 +291,162 @@
         /* =========================================
            クロージング（CTA）
         ========================================= */
-        .closing {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #003d82 100%);
-            color: var(--white);
-            padding: 80px 0;
-            overflow: hidden; /* アニメーションではみ出ないように設定 */
-        }
+        .closing { background: linear-gradient(135deg, var(--primary-color) 0%, #003d82 100%); color: var(--white); padding: 80px 0; overflow: hidden; }
         .closing .section-title { color: var(--white); margin-bottom: 25px; }
         .closing p { font-size: 18px; margin-bottom: 30px; font-weight: 700; line-height: 1.8; }
+
+        /* =========================================
+           📝 お問い合わせ・資料請求フォーム（追加部分）
+        ========================================= */
+        .form-section {
+            background-color: #f6f8e8; /* 画像に近い淡いグリーン背景 */
+            padding: 60px 0 80px;
+        }
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .form-title {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 35px;
+            color: #000;
+        }
+        .form-group {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .form-group > label {
+            width: 250px;
+            font-size: 14px;
+            color: #000;
+            flex-shrink: 0;
+        }
+        .form-group .req {
+            color: #e00; /* 必須の赤色マーク */
+            margin-left: 2px;
+        }
+        .form-input-box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .form-input-box input[type="text"],
+        .form-input-box input[type="email"],
+        .form-input-box input[type="tel"],
+        .form-input-box select,
+        .form-input-box textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+        .form-input-box textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        /* 備考欄・チェックボックスを上揃えにする用 */
+        .form-group.align-top {
+            align-items: flex-start;
+        }
+        .form-group.align-top > label {
+            margin-top: 6px;
+        }
+
+        /* プライバシーポリシーチェック */
+        .privacy-check {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .privacy-check input {
+            margin-right: 5px;
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+        }
+        .privacy-check label {
+            font-size: 14px;
+            color: #000;
+            cursor: pointer;
+        }
+        .privacy-check a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        /* reCAPTCHAのダミーデザイン */
+        .recaptcha-dummy {
+            width: 100%;
+            max-width: 302px;
+            height: 76px;
+            background: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .rc-left { display: flex; align-items: center; gap: 10px; }
+        .rc-left input[type="checkbox"] {
+            width: 28px; height: 28px;
+            cursor: pointer;
+        }
+        .rc-text { font-size: 14px; color: #222; }
+        .rc-right { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .rc-right img { width: 32px; }
+        .rc-links { font-size: 10px; color: #555; margin-top: 2px; text-align: center; line-height: 1.2; }
+
+        /* 送信・リセットボタン */
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-submit {
+            background-color: #0088ff;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-submit:hover { background-color: #0066cc; }
+        .btn-reset {
+            background-color: #f1f1f1;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-reset:hover { background-color: #e2e2e2; }
+
+        /* スマホ用フォーム微調整 */
+        @media (max-width: 768px) {
+            .form-group { flex-direction: column; align-items: flex-start; }
+            .form-group > label { width: 100%; margin-bottom: 5px; }
+            .form-input-box { width: 100%; }
+            .form-input-box input[type="text"],
+            .form-input-box input[type="email"],
+            .form-input-box input[type="tel"],
+            .form-input-box select,
+            .form-input-box textarea { max-width: 100%; }
+            .desktop-only { display: none; }
+        }
 
         /* =========================================
            フッター
@@ -346,9 +456,7 @@
         footer a:hover { color: var(--white); }
         .copyright { margin-top: 20px; font-size: 12px; color: #888888; }
 
-        /* =========================================
-           スマホ用微調整
-        ========================================= */
+        /* スマホ用全体微調整 */
         @media (max-width: 767px) {
             .hero h1 { font-size: 24px; }
             .hero h1 .large { font-size: 34px; }
@@ -366,7 +474,7 @@
     <header>
         <div class="container header-inner">
             <div class="logo">AIセラピスト co-mii</div>
-            <a href="#cta" class="header-btn">資料ダウンロード / お問い合わせ</a>
+            <a href="#contact-form" class="header-btn">資料ダウンロード / お問い合わせ</a>
         </div>
     </header>
 
@@ -389,8 +497,8 @@
                 <p style="font-weight: normal; margin-bottom: 30px;">属人化しがちなアセスメントから計画書作成、日々の療育メニューの提案まで、AIがワンストップでサポートします。</p>
 
                 <div class="btn-wrap">
-                    <a href="#cta" class="btn"><i class="fa-solid fa-file-pdf"></i> 無料資料ダウンロード 〉</a>
-                    <a href="#cta" class="btn btn-outline"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
+                    <a href="#contact-form" class="btn"><i class="fa-solid fa-file-pdf"></i> 無料資料ダウンロード 〉</a>
+                    <a href="#contact-form" class="btn btn-outline"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
                 </div>
             </div>
 
@@ -458,7 +566,9 @@
                     <h3>5領域を網羅！AIによる客観的で緻密な「発達特性アセスメント」</h3>
                     <p>認知、感覚、社会性など7つの分野ごとに「はい or いいえ」で回答するだけの簡単な診断テストを実施。AIが子ども一人ひとりの特性を分析し、レーダーチャートで視覚的にわかりやすく結果を提示します。専門知識がなくても、属人化しない精度の高いアセスメントが可能です。</p>
                 </div>
-                <div class="feature-img"><i class="fa-solid fa-chart-pie"></i></div>
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600" alt="発達特性アセスメントのイメージ">
+                </div>
             </div>
 
             <div class="feature-card">
@@ -467,7 +577,9 @@
                     <h3>個別支援計画書を「半自動」で作成！（作成時間を約90%削減）</h3>
                     <p>アセスメント結果に応じて、5領域（健康・生活、運動・感覚、認知・行動、言語・コミュニケーション、人間関係・社会性）ごとの支援目標をAIが自動設定し、個別支援計画書に反映します。これまで児童1人あたり約4時間かかっていた作成業務を大幅にショートカット。次回の更新時に便利なモニタリング機能も搭載しています。</p>
                 </div>
-                <div class="feature-img"><i class="fa-solid fa-file-signature"></i></div>
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=600" alt="個別支援計画書作成のイメージ">
+                </div>
             </div>
 
             <div class="feature-card">
@@ -476,7 +588,9 @@
                     <h3>診断結果に合わせた「日々の療育メニュー」を提案</h3>
                     <p>「今日は何をしよう…」と悩む必要はありません。アセスメント結果に基づき、500種類以上の豊富な療育メニューの中から「今、優先して取り組むべきトレーニング」をAIが提案。スタッフ向けの指導マニュアルも充実しており、誰でも質の高い療育を日々実践できます。保護者への報告に使える日報機能も搭載。</p>
                 </div>
-                <div class="feature-img"><i class="fa-solid fa-puzzle-piece"></i></div>
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1566024287541-55b1613587b1?auto=format&fit=crop&q=80&w=600" alt="日々の療育メニューのイメージ">
+                </div>
             </div>
 
             <div class="feature-card">
@@ -485,7 +599,9 @@
                     <h3>令和6年報酬改定対応！「専門的支援実施加算」の取得を強力サポート</h3>
                     <p>加算の取得に必要な「専門的支援実施計画書」も、アセスメント結果から半自動で作成できます。5年以上の実務経験を持つ「保育士」や「児童指導員」でも、co-miiを活用することで要件を満たしやすく、事業所の収益アップ（専門的支援体制加算と合わせて546単位/月・1人 ※条件あり）に大きく貢献します。</p>
                 </div>
-                <div class="feature-img"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <div class="feature-img">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600" alt="専門的支援実施加算のイメージ">
+                </div>
             </div>
         </div>
     </section>
@@ -536,7 +652,7 @@
             <div class="flow-container">
                 <div class="flow-step">
                     <div class="step-num">1</div>
-                    <div><div class="step-text">お問い合わせ・資料請求</div><div class="step-desc">まずはフォームよりお気軽にご連絡ください</div></div>
+                    <div><div class="step-text">お問い合わせ・資料請求</div><div class="step-desc">まずは下部のフォームよりお気軽にご連絡ください</div></div>
                 </div>
                 <div class="flow-step">
                     <div class="step-num">2</div>
@@ -558,7 +674,7 @@
         </div>
     </section>
 
-    <section class="closing" id="cta">
+    <section class="closing">
         <div class="container flex-container">
             <div class="flex-content">
                 <h2 class="section-title left" style="color: #fff;">書類作成のストレスから解放され、<br>子どもたちと「笑顔で向き合う時間」を取り戻しませんか？</h2>
@@ -567,8 +683,8 @@
                     まずは詳しい料金プランや機能がわかる無料資料をご覧いただくか、実際の画面をお見せするオンライン説明会へお気軽にご参加ください！
                 </p>
                 <div class="btn-wrap">
-                    <a href="#" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 無料資料をダウンロード 〉</a>
-                    <a href="#" class="btn btn-outline" style="border-color: #fff; color: #fff;"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
+                    <a href="#contact-form" class="btn" style="background-color: #fff; color: var(--accent-color);"><i class="fa-solid fa-file-pdf"></i> 無料資料をダウンロード 〉</a>
+                    <a href="#contact-form" class="btn btn-outline" style="border-color: #fff; color: #fff;"><i class="fa-solid fa-desktop"></i> オンライン説明会に申込む 〉</a>
                 </div>
             </div>
 
@@ -578,13 +694,126 @@
         </div>
     </section>
 
+
+    <section id="contact-form" class="form-section">
+        <div class="form-container">
+            <h2 class="form-title">AIセラピスト co-mii 資料請求フォーム</h2>
+            
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label>会社<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="company" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>お名前<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="name" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>電話番号<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="tel" name="tel" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>メール<span class="req">*</span></label>
+                    <div class="form-input-box" style="gap: 8px;">
+                        <input type="email" name="email" required style="flex: 1; max-width: 370px;">
+                        <i class="fa-regular fa-circle-question" style="color: #bbb; font-size: 18px;"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>連絡の取れやすい時間帯<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="contact-time" required>
+                            <option value="">選択してください</option>
+                            <option value="いつでも">いつでも</option>
+                            <option value="午前中">午前中</option>
+                            <option value="午後">午後</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>ご住所<span class="req">*</span></label>
+                    <div class="form-input-box"><input type="text" name="address" required></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>問い合わせ内容<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="inquiry-type" required>
+                            <option value="">選択してください</option>
+                            <option value="資料請求">資料請求</option>
+                            <option value="オンライン説明会希望">オンライン説明会希望</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>問い合わせのきっかけ<span class="req">*</span></label>
+                    <div class="form-input-box">
+                        <select name="trigger" required>
+                            <option value="">選択してください</option>
+                            <option value="Web検索">Web検索</option>
+                            <option value="SNS">SNS</option>
+                            <option value="知人の紹介">知人の紹介</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>その他のきっかけ</label>
+                    <div class="form-input-box"><input type="text" name="trigger-other"></div>
+                </div>
+                
+                <div class="form-group align-top">
+                    <label>備考欄</label>
+                    <div class="form-input-box"><textarea name="memo"></textarea></div>
+                </div>
+
+                <div class="form-group align-top">
+                    <label class="desktop-only"></label>
+                    <div class="form-input-box" style="flex-direction: column; align-items: flex-start;">
+                        
+                        <div class="privacy-check">
+                            <input type="checkbox" id="privacy-check" required>
+                            <label for="privacy-check"><a href="#">プライバシーポリシー</a>に同意する。</label>
+                        </div>
+
+                        <div class="recaptcha-dummy">
+                            <div class="rc-left">
+                                <input type="checkbox" required>
+                                <div class="rc-text">私はロボットではありません</div>
+                            </div>
+                            <div class="rc-right">
+                                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA">
+                                <div class="rc-links">reCAPTCHA<br>プライバシー - 利用規約</div>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit">送信する</button>
+                            <button type="reset" class="btn-reset">リセットする</button>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <p style="margin-bottom: 15px; font-weight: bold; font-size: 16px;">運営会社：株式会社サミットラン</p>
             <div>
-                <a href="#">会社概要</a> | 
+                <a href="https://summitrun.co.jp/" target="_blank" rel="noopener noreferrer">会社概要</a> | 
                 <a href="#">プライバシーポリシー</a> | 
-                <a href="#">お問い合わせ</a>
+                <a href="#contact-form">お問い合わせ</a>
             </div>
             <p class="copyright">&copy; Summit Run Co., Ltd. All Rights Reserved.</p>
         </div>
